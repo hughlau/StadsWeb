@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>机构首页</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+
+ 
+        <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">        
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+
+    </head>
+    <body>
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="backHome();" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="CXZS2015_bd2">
+            <div class="CXZS2015_JG_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic2.png">
+                <span class="j_tt">科研院所 科技创新能力排行</span>
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZJ_list" id='org_Ranking'>
+                <!-- <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN09327')">
+                    <span class="l_name">中国科学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">302717</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">4613</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">6141</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">300</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a> 
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('GXY39731')">
+                    <span class="l_name">中国医学科学院、北京协和医学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">187258</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">9810</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">20972</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">701</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN05460')">
+                    <span class="l_name">中国农业科学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">108298</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">3597</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">3133</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">22</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('LK020707')">
+                    <span class="l_name">中国社会科学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">202810</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">5360</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">7141</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">50</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN04174')">
+                    <span class="l_name">中国科学院上海分院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">40784</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">562</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">74</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">0</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN01846')">
+                    <span class="l_name">中国科学院化学研究所</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">180234</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">3589</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">5045</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">76</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN00769')">
+                    <span class="l_name">中国科学院长春应用化学研究所</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">14675</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">2377</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">340</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">7</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN01338')">
+                    <span class="l_name">中国中医科学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">229339</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">3347</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">5353</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">86</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN06776')">
+                    <span class="l_name">中国科学院沈阳分院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">128690</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">1632</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">3837</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">11</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('KYN01855')">
+                    <span class="l_name">中国科学院大连化学物理研究所</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">240874</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">3866</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">5961</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">133</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a> -->
+                <!-- <a class="l_one" href="javascript:void(0);" onclick="ser2('Y40057')">
+                    <span class="l_name">杭州师范大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">20033</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">332</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">39</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">5</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('Y39940')">
+                    <span class="l_name">中国美术学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">3175</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">965</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">1</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">0</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('Y39672')">
+                    <span class="l_name">浙江科技学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">6077</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">1356</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">147</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">0</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href="javascript:void(0);" onclick="ser2('Y39745')">
+                    <span class="l_name">四川大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">230240</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">3940</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">6281</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">131</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                
+               
+                <a class="l_one" href="javascript:void(0);" onclick="./uexWeiXin.html">
+                    <span class="l_name">温州大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num2">论文总数：<span class="l_t1">16352</span></span>
+                    <span class="l_num2">成果总数：<span class="l_t1">300</span></span>
+                    <span class="l_num2">专利总量：<span class="l_t1">43</span></span>
+                    <span class="l_num2">标准总量：<span class="l_t1">1</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a> -->
+            </div>
+       </div>        
+		
+        <!--底部按钮栏设置,图标在css样式文件夹中修改-->
+        <div id="bottom" class="CXZS2015_bottom_all">
+        </div>
+
+    </body>
+	<script>
+		function ser(){
+			//onclick="ser2('Y40254')"
+			// if($("select option:selected").val()=="ser"){
+				// window.location.href='jg_ser_list.html';
+			// }else{
+				// window.location.href='jg_tui_list.html';
+			// }
+			window.sessionStorage.removeItem("serValue"); 
+			window.sessionStorage.setItem("serValue",$("#serValue").val());
+			
+            if($("#serValue").val()!=''){
+                window.location.href='jg_ser_list.html?q=' + encodeURIComponent($("#serValue").val());
+                //window.location.href='jg_ser_list.html';
+            }else if($("#serValue").val()==''){
+                alert("检索词不能为空!");
+            }
+		}
+		function ser2(serWords){
+            //alert("234234");
+            window.sessionStorage.removeItem("serValue"); 
+            window.sessionStorage.setItem("serValue",serWords);
+            window.location.href='jg_info.html?id='+serWords;
+            // if($("#serValue").val()!=''){
+                // window.location.href='jg_ser_list.html?q=' + encodeURIComponent($("#serValue").val());
+                // //window.location.href='jg_ser_list.html';
+            // }else if($("#serValue").val()==''){
+                // alert("检索词不能为空!");
+            // }
+        }
+		
+    	zy_init();
+        window.onload = function(type){
+			//if(!type)
+			//{
+                try{
+                    ////$toast("正在加载...");
+                    //var jsonBack='[{"id":1,"rankid":1,"fullname":"专家1","fullid":"1"},{"id":2,"rankid":1,"fullname":"专家2","fullid":"2"},{"id":3,"rankid":1,"fullname":"专家3","fullid":"3"}]';
+                    
+                    //document.getElementById('org_order').innerHtml='';
+                   
+
+                    $.ajax({
+                        url: "http://omp.sciinfo.cn/index/third/user/rankToJackson?rtype=ORG&PID=STADS&callback=success_jsonpCallback",//接口地址
+                        type: "get",
+                        dataType: "jsonp",
+                        timeout: 20000,
+                        cache: false,
+                        async: false,
+                        jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数
+                        jsonpCallback: "success_jsonpCallback", //callback的function名称
+                        //data: { rtype: "ORG", PID: "STADS", callback: "dataBack" },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            //调用失败    
+                            ////$closeToast();
+                            alert("服务器连接失败，请稍后再试！");
+                            return;
+                        },
+                        success: function (json) {
+                            //返回结果    
+
+                           // //$closeToast();
+                        }
+                    });
+
+
+                }catch(x) {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }
+			//}
+        }	
+        function success_jsonpCallback(data) {
+            var html = '';
+            var obj = data;
+            for (var i = 0; i < obj.length; i++) {
+                html += '<a class="l_one" href="javascript:void(0);" onclick="ser2(\'' + obj[i].fullid + '\')">';
+                html += '<span class="l_name">' + (obj[i].fullname == undefined ? "" : obj[i].fullname) + '</span>';
+                html += '<span class="CXZS2015_clear"></span>';
+                html += '<span class="l_num2">论文总数：<span class="l_t1">' + (obj[i].lws == undefined ? "" : obj[i].lws) + '</span></span>';
+                html += '<span class="l_num2">成果总数：<span class="l_t1">' + (obj[i].cgs == undefined ? "" : obj[i].cgs) + '</span></span>';
+                html += '<span class="l_num2">专利总量：<span class="l_t1">' + (obj[i].zls == undefined ? "" : obj[i].zls) + '</span></span>';
+                html += '<span class="l_num2">标准总量：<span class="l_t1">' + (obj[i].bzs == undefined ? "" : obj[i].bzs) + '</span></span>';
+                html += '<span class="CXZS2015_clear"></span></a>';
+
+            };
+            $('#org_Ranking').html(html);
+        }
+        function backHome(){
+            window.location.href="../index.html";
+        }	
+	</script>
+</html>

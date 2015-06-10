@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>机构信息</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+           
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <script src="../js/highcharts.js"></script>
+        <!-- 保存图片 lbt 20150331  -->
+        <script src="../js/canvg.js"></script>
+        <script src="../js/saveimage.js"></script>
+        <!--分享-->
+        <script>
+            var Image_Type='';
+            var Image_Title='';
+            var Image_ID='';
+            var Image_DesID='';
+        </script>
+        <script src="../js/weChat.js"></script>
+        <script src="../js/sina.js"></script>
+        <script src="../js/shareImages.js"></script>
+        
+    </head>
+    <body>
+    <div class="CXZS2015_Big_shaddow">
+        <div class="FX_main">
+            <div class="FX_main_div">
+                <div class="FX_title">分享操作：</div>
+                <div class="FX_links">
+                    <a href="javascript:void(0);" onclick="shareImgWithWeChat(0);"><img src="../images/FX_ico_1.png"><br/>微信好友</a>
+                    <a href="javascript:void(0);" onclick="shareImgWithWeChat(1);"><img src="../images/FX_ico_2.png"><br/>朋友圈</a>
+                    <a href="javascript:void(0);" onclick="shareImgWithSina();"><img src="../images/FX_ico_3.png"><br/>新浪微博</a>              
+                    <a href="javascript:void(0);" onclick="shareWithQQ();"><img src="../images/FX_ico_4.png"><br/>Q Q</a>
+                    <a href="javascript:void(0);" onclick="shareWithQQZone();"><img src="../images/FX_ico_5.png"><br/>QQ空间</a>
+                    <a href="javascript:void(0);" onclick="shareImgToLocal();"><img src="../images/FX_ico_6.png"><br/>保存到本地</a>
+                    <div class="CXZS2015_clear"></div>
+                </div>
+                <a href="javascript:void(0);" class="FX_button">取 消</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    <!--点分享按钮-->
+    $(function(){
+    $('.CXZS2015_Share').click(function(){
+        $('.CXZS2015_Big_shaddow').fadeIn('fast');
+        Image_Type=this.dataset && this.dataset.imagetype;
+        Image_Title=this.dataset && this.dataset.imagetitle;
+        Image_ID=this.dataset && this.dataset.imageid;
+        Image_DesID=this.dataset && this.dataset.imagedesid;
+    });
+    $('.FX_button').click(function(){
+        $('.CXZS2015_Big_shaddow').fadeOut('fast');
+        Image_Type='';
+        Image_Title='';
+        Image_ID='';
+        Image_DesID='';
+        });
+    });
+    </script>  
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="historyBack();" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1" style=" display: none;">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+        </div>
+        <!-- <div class="navbar navbar-fixed-top" role="navigation"  style="background-color:#555;height:50px;border-bottom:1px #797979 solid;">
+            <div class="container">
+                <div class="row" style="margin-top:10px;margin-left:10px;margin-right:10px;border-bottom:1px #fff solid;">
+                    <div class="col-xs-8" style="font-size:20px;color:#fff;" id="name">
+                        
+                    </div>
+                    <div class="col-xs-4" style="height:28px;font-size:12px;color:#fff;text-align:right; vertical-align:text-bottom;">
+                        万方软件
+                    </div>
+                </div>
+            </div>
+        </div> -->
+                        
+        <div class="CXZS2015_bd3" id="main">
+            <div class="CXZS2015_JG_MingPian">
+                <div class="z_MingPian">
+                    <div class="z_mp1"><span id="orgname"></span></div>
+                    <div class="z_mp2">
+                        <table id="featurecollege">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="CXZS2015_JG_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic5.png">
+                <span class="j_tt">期刊论文产出</span>
+                <!--<div class="CXZS2015_Share" style="display:none;">
+                    <a herf="javascript:void(0)" class="a_share">
+                        <img alt="" src="../images/CXZS_share_2.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a>
+                    <div class="CXZS2015_Share_box">
+                        <a class="s_one" onclick="shareWeixinText();">微信<img alt="" src="../images/CXZS_Share_ico2.png"></a>
+                        <a class="s_one" onclick="shareSinaText();">微博<img alt="" src="../images/CXZS_Share_ico1.png"></a>
+                        <a class="s_one" onclick="shareTentText();">Q Q<img alt="" src="../images/CXZS_Share_ico3.png"></a>
+                    </div>
+                </div>-->
+                <div class="CXZS2015_Share" data-ImageType='svg' data-ImageTitle='期刊论文产出' data-ImageID='biao1_1' data-ImageDesID=''>
+ <!--                    <a herf="javascript:void(0)" class="a_share" >
+                        <img alt="" src="../images/CXZS_share_3.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a> -->
+                </div>
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="biao1" style="margin: 0 auto;height:200px;"></div>
+                        <div id="biao1_1" style="margin: 0 auto;height:200px;display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="CXZS2015_JG_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic5.png">
+                <span class="j_tt">外文期刊论文产出</span>
+                <div class="CXZS2015_Share" data-ImageType='svg' data-ImageTitle='外文期刊论文产出' data-ImageID='biao4_1' data-ImageDesID=''>
+<!--                     <a herf="javascript:void(0)" class="a_share" >
+                        <img alt="" src="../images/CXZS_share_3.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a> -->
+                </div>
+                <!--<div class="CXZS2015_Share" style="display:none;">
+                    <a herf="javascript:void(0)" class="a_share">
+                        <img alt="" src="../images/CXZS_share_2.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a>
+                    <div class="CXZS2015_Share_box">
+                        <a class="s_one" onclick="shareWeixinText();">微信<img alt="" src="../images/CXZS_Share_ico2.png"></a>
+                        <a class="s_one" onclick="shareSinaText();">微博<img alt="" src="../images/CXZS_Share_ico1.png"></a>
+                        <a class="s_one" onclick="shareTentText();">Q Q<img alt="" src="../images/CXZS_Share_ico3.png"></a>
+                    </div>
+                </div>-->
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="biao4" style="margin: 0 auto;height:200px;"></div>
+                        <div id="biao4_1" style="margin: 0 auto;height:200px;display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 保存图片canvas  -->
+        <canvas id="myCanvas" style="display: none;"></canvas>
+        <!--div class="container" id="main" style="padding-top:50px;padding-bottom:100px;">         
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    <img src="../css/images/jigou1.png" width="50">期刊论文产出
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="biao1" style="margin: 0 auto;height:200px;"></div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="biao2" style="margin: 0 auto;height:200px;"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    <img src="../css/images/yzbg.png" width="50">外文期刊论文产出情况
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="biao3" style="margin: 0 auto;height:200px;"></div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="biao4" style="margin: 0 auto;height:200px;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!--底部按钮栏设置,图标在css样式文件夹中修改-->
+
+    </body>
+    <script>
+        var id,name;    
+        var pl = {};
+        // begin --lhc 2015年4月14日10:09:46
+        var page=0;
+        var markPoint='';
+
+        // end --lhc 2015年4月14日10:09:46
+        //begin add lhc 20150403
+        var isOneResult=false;
+        var zj_list_query="";
+        var backUrl="";
+        var backParamName="";
+        var backToZTFX=false;
+
+        function historyBack(){
+            if(isOneResult){
+                window.location.href="jg_index.html";
+            }else{
+                if(undefined !=zj_list_query && zj_list_query!=""){
+                    // begin --lhc 2015年4月14日10:09:46
+                    window.location.href='jg_ser_list.html?q='+zj_list_query+'&page='+page+'&markPoint='+markPoint;
+                    // end --lhc 2015年4月14日10:09:46
+                }else{
+                    if(undefined !=backUrl && ""!=backUrl){
+                        window.location.href=backUrl;
+                    }else{
+                        window.location.href="jg_index.html";
+                    }
+                    
+                }
+            }
+        }
+        //end add lhc 20150403
+        function resultcallback(res, xml, text, proxy) {
+            //$closeToast(); 
+            var dataObj=eval("("+res+")");
+            var cateLabels = [];
+            var cateData = [];
+
+            //$("#name").html(dataObj.hits.hits[0]['_source']['name']);
+            var orgname=dataObj.hits.hits[0]['_source']['name']; 
+            
+            if(orgname.indexOf('%')>-1){
+                orgname=orgname.split('%')[0];
+            }
+            $("#orgname").html(orgname);
+            // var featurecollege=dataObj.hits.hits[0]['_source']['featurecollege'];
+            // ////判断高校类别
+            // var featurecollegehtml="<tr>";
+            // if(featurecollege.indexOf("“985”工程高校")>=0)
+            // {
+                // featurecollegehtml+="<td>985高校</td>";
+            // }
+            // if(featurecollege.indexOf("“211”工程高校")>=0)
+            // {
+                // featurecollegehtml+="<td>211高校</td>";
+            // }
+            // if(featurecollege.indexOf("“985”工程高校")<0&&featurecollege.indexOf("“211”工程高校")<0)
+            // {
+                // featurecollegehtml+="<td>普通高校</td>";
+            // }
+            // featurecollegehtml+="</tr>";
+            // $("#featurecollege").html(featurecollegehtml);
+            ///
+            pl.indexName = "wf_mds_chn_qikan";
+            pl.queryString = "ORG:"+orgname+" AND NOT SCORE:0";
+            pl.facets = "YEAR";                     
+
+            proxy.EsSearch(pl, true, function(res1, xml, text){
+                baobiao1(res1, cateLabels, cateData);
+            }, function(){$alert("获取核心刊数据失败，请稍后再试！");});
+            
+            pl.queryString = "ORG:"+$("#name").html()+" SCORE:0";
+            proxy.EsSearch(pl, true, function(res2, xml, text){
+                baobiao2(res2, cateLabels, cateData);
+            }, function(){$alert("获取核心刊数据失败，请稍后再试！");});        
+            
+            pl.indexName = "wf_mds_en_qikan";
+            pl.queryString = "ORG:"+$("#name").html();
+            pl.facets = "YEAR";                     
+
+            proxy.EsSearch(pl, true, function(res3, xml, text){
+                baobiao3(res3);
+            }, function(){$alert("获取外文期刊论文产出情况失败，请稍后再试！");});
+             
+            
+            getCstpcdData();  
+                                       
+        }
+        function getCstpcdData() {
+            var d = new Date();
+            var vYear = d.getFullYear();
+            var yearList=[];
+            var sciList=[];
+            var ssciList=[];
+            var eiList=[];
+            for(i=0;i<=9;i++)
+            {
+                yearList[i]=vYear-9+i;
+                //SCI,SSCI,EI  
+            }
+                         
+                var queryStr="";    
+                var orgna = $("#orgname").html();         
+                pl = {
+                    type:"select",
+                    userName:"",
+                    password:"",
+                    indexName:"cstpcd_en_lw",
+                    queryString:"",
+                    sortField:"",
+                    fields:"",
+                    pageNumber:"0",
+                    pagePerNo:"10",
+                    facets:"YEAR",
+                    fm:"@JSON"
+                }
+                queryStr="FIRSTORG:\""+orgna+"\"";
+                
+                pl.queryString = queryStr+" AND PUBLISHER: SCI";
+              $.ajax({
+                    type: "POST",
+                    url: "http://168.160.200.114/saveimage.ashx",
+                    data: pl,
+                    success: function(resSCI) {
+                        //alert(resSCI);
+                        if (resSCI != null && resSCI != "") {
+                            var dataObj=eval("("+resSCI+")");
+                            for(i=0;i<=9;i++)
+                            {
+                                if(dataObj.facets!=null && dataObj.facets.year!=null){
+                                    var curValue=dataObj.facets.year[yearList[i]];
+                                    if(curValue==undefined||curValue==null||curValue=="")
+                                    {
+                                        sciList[i]=0;
+                                    }
+                                    else
+                                        sciList[i]=dataObj.facets.year[yearList[i]];
+                                }else{
+                                    sciList[i]=0;
+                                }
+                            }
+                        } 
+                    },
+                    async: false                           
+                });
+                
+              pl.queryString = queryStr+" AND PUBLISHER: SSCI";
+              
+              $.ajax({
+                    type: "POST",
+                    url: "http://168.160.200.114/saveimage.ashx",
+                    data: pl,
+                    success: function(resSSCI) {
+                        //alert(resSSCI);
+                        if (resSSCI != null && resSSCI != "") {
+                            var dataObj=eval("("+resSSCI+")");
+                            for(i=0;i<=9;i++)
+                            {
+                                if(dataObj.facets!=null && dataObj.facets.year!=null){
+                                    var curValue=dataObj.facets.year[yearList[i]];
+                                    if(curValue==undefined||curValue==null||curValue=="")
+                                    {
+                                        ssciList[i]=0;
+                                    }
+                                    else
+                                        ssciList[i]=dataObj.facets.year[yearList[i]];
+                                }else{
+                                    ssciList[i]=0;
+                                }
+                            } 
+                        }
+                    },
+                    async: false                       
+                });
+                
+                pl.queryString = queryStr+" AND PUBLISHER: EI";
+               
+               $.ajax({
+                    type: "POST",
+                    url: "http://168.160.200.114/saveimage.ashx",
+                    data: pl,
+                    success: function(resEI) {
+                        //alert(resEI);
+                        if (resEI != null && resEI != "") {
+                            var dataObj=eval("("+resEI+")");
+                            for(i=0;i<=9;i++)
+                            {
+                                if(dataObj.facets!=null && dataObj.facets.year!=null){
+                                    var curValue=dataObj.facets.year[yearList[i]];
+                                    if(curValue==undefined||curValue==null||curValue=="")
+                                    {
+                                        eiList[i]=0;
+                                    }
+                                    else
+                                        eiList[i]=dataObj.facets.year[yearList[i]];
+                                }else{
+                                    eiList[i]=0;
+                                }
+                            }
+                        }
+                     },
+                    async: false                      
+                });
+                      
+            baobiao4(yearList,sciList,ssciList,eiList);
+        }
+        function baobiao4(yearlist,scilist,sscilist,eilist)
+        {
+            $('#biao4').highcharts({
+                title: {
+                    text: '外文期刊发文趋势'
+                },
+                subtitle: {
+                    text: $("#orgname").html()//+'核心发文量:' + total
+                },
+                xAxis: {
+                    categories: yearlist
+                },
+                yAxis: {
+                    title: {
+                        text: '发文量'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                legend: {
+                    //layout: 'vertical',
+                    //align: 'right',
+                    //verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: 'SCI',
+                    data: scilist
+                }, {
+                    name: 'SSCI',
+                    data: sscilist
+                }, {
+                    name: 'EI',
+                    data: eilist
+                }]
+            }); 
+            $('#biao4_1').highcharts({
+                title: {
+                    text: '外文期刊发文趋势'
+                },
+                subtitle: {
+                    text: $("#orgname").html()//+'核心发文量:' + total
+                },
+                xAxis: {
+                    categories: yearlist
+                },
+                yAxis: {
+                    title: {
+                        text: '发文量'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                legend: {
+                    //layout: 'vertical',
+                    //align: 'right',
+                    //verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: 'SCI',
+                    data: scilist
+                }, {
+                    name: 'SSCI',
+                    data: sscilist
+                }, {
+                    name: 'EI',
+                    data: eilist
+                }]
+            });         
+        }
+
+        function baobiao3(res3){
+            $('#biao3').highcharts({
+                title: {
+                    text: $("#orgname").html()+'-外文期刊论文收录分布情况',
+                    x: -20 //center
+                },
+                xAxis: {
+                    categories: ["ESI", "SCI"]
+                },
+                yAxis: {
+                    title: {
+                        text: '发文量'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '篇'
+                },
+                legend: {
+                    //layout: 'vertical',
+                    //align: 'right',
+                    //verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: '核心刊',
+                    data: [10000,30000]
+                }]
+            });                     
+        }
+        
+        function baobiao2(res2,cateLabels, cateData){
+            var dataObj=eval("("+res2+")");
+            var i = 0;
+            var total = 0;
+            var cateLabels2 = [];
+            var cateData2 = [];         
+            for(var f in dataObj.facets.year){
+                cateLabels2[i]=f;
+                cateData2[i]=dataObj.facets.year[f];
+                total += cateData2[i];
+                i++;
+            }   
+                        
+            $('#biao2').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: $("#orgname").html()+'-核心期刊发文比重趋势'
+                },
+                xAxis: {
+                    categories: cateLabels2
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '发文量'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br>',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'percent'
+                    }
+                },
+                    series: [{
+                    name: '核心刊',
+                    data: cateData
+                }, {
+                    name: '非核心刊',
+                    data: cateData2
+                }]
+            });         
+        }
+        
+        function baobiao1(res1, cateLabels, cateData){
+            var dataObj=eval("("+res1+")");
+            var i = 0;
+            var total = 0;
+            for(var f in dataObj.facets.year){
+                cateLabels[i]=f;
+                cateData[i]=dataObj.facets.year[f];
+                total += cateData[i];
+                i++;
+            }   
+            $('#biao1').highcharts({
+                title: {
+                    text: '中文核心期刊发文趋势'
+                },
+                subtitle: {
+                    text: $("#orgname").html()//+'核心发文量:' + total
+                },
+                xAxis: {
+                    categories: cateLabels
+                },
+                yAxis: {
+                    title: {
+                        text: '发文量'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '篇'
+                },
+                legend: {
+                    //layout: 'vertical',
+                    //align: 'right',
+                    //verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                //begin  --lhc 2015年4月8日09:42:32
+                series: [{
+                    name: '发文量',
+                    data: cateData
+                }]
+                //end  --lhc 2015年4月8日09:42:32
+            }); 
+            $('#biao1_1').highcharts({
+                title: {
+                    text: '中文核心期刊发文趋势'
+                },
+                subtitle: {
+                    text: $("#orgname").html()//+'核心发文量:' + total
+                },
+                xAxis: {
+                    categories: cateLabels
+                },
+                yAxis: {
+                    title: {
+                        text: '发文量'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '篇'
+                },
+                legend: {
+                    //layout: 'vertical',
+                    //align: 'right',
+                    //verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                //begin  --lhc 2015年4月8日09:42:32
+                series: [{
+                    name: '发文量',
+                    data: cateData
+                }]
+                //end  --lhc 2015年4月8日09:42:32
+            });           
+        }
+
+        function failurecallback(res, xml, text, proxy) {
+            //$closeToast();
+            alert("服务器连接失败，请稍后再试！");
+        }       
+                
+        function gotproxycallback(proxy, wsdl, text) {
+            var queryStr="";        
+            var Request = zy_parse();
+            id = Request["id"];
+            // begin --lhc 2015年4月14日10:09:46
+            markPoint=id;
+            page=Request["page"];
+                backUrl=Request["backUrl"];
+            
+            // end --lhc 2015年4月14日10:09:46
+            if(undefined!=backUrl && ''!=backUrl){
+                backToZTFX=true;
+            }
+            //begin add lhc 20150403
+            isOneResult=Request["isOneResult"];
+            zj_list_query=Request["q"];
+            //end add lhc 20150403
+            name = Request["name"];         
+            pl = {
+                userName:"!@#$4321!@#$",
+                password:"!@#$4321!@#$",
+                //begin --lhc 2015年4月27日13:52:09
+                //indexName:"wf_mds_daxue",
+                indexName:"wf_mds_chn_org",
+                //end --lhc 2015年4月27日13:52:09
+                queryString:"",
+                sortField:"",
+                fields:"",
+                pageNumber:"0",
+                pagePerNo:"10",
+                facets:"",
+                fm:"@JSON"
+            }
+            
+            if(id!=""&&id!=null&&id!=undefined){
+                //queryStr="_id:"+id;
+                queryStr="ORGID:"+id;
+            }else{
+                queryStr="NAME:\""+name+"\""
+            }
+            pl.queryString = queryStr;
+
+            if (proxy instanceof SOAPProxy) {
+               proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            } else {
+                alert("服务器连接失败，请稍后再试！");
+            }
+        }   
+
+        window.onload = function(type){
+
+                try {
+                    //$toast("正在加载...");
+                    SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                } catch (x) {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }        
+            
+        }
+        function backHome(){
+            window.location.href="../index.html";
+        }
+        
+
+    </script>
+</html>

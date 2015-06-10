@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>用户注册</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- <link rel="stylesheet" href="../css/mui.min.css">
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script> -->
+        
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/mui.min.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        
+        <style>
+            html,body {
+                background-color: #efeff4;
+            }
+            h5 {
+                margin: 5px 7px;
+            }
+        </style>
+        
+    </head>
+
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">用户注册</h1>
+            <button type="button" onclick="history.go(-1);" id="confirm" class="mui-btn mui-btn-link">
+                <span class="mui-icon mui-icon-back"></span>返回
+            </button>
+        </header>
+        
+        <div class="mui-content" id="main">
+            
+            <div class="mui-content-padded" style="margin: 5px;">
+                <form class="mui-input-group">
+                    <div class="mui-input-row">
+                        <label>姓名</label>
+                        <input name="userID" id="userID" type="text" class="mui-input-clear" placeholder="用户名">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>密码</label>
+                        <input name="userPW" id="userPW" type="password" class="mui-input-clear" placeholder="******">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>确认</label>
+                        <input name="reuserPW" id="reuserPW" type="password" class="mui-input-clear" placeholder="******">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>邮箱</label>
+                        <input name="email" id="email" type="text" class="mui-input-clear" placeholder="name@email.com">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>电话</label>
+                        <input name="phone" id="phone" type="text" class="mui-input-clear" placeholder="手机号码">
+                    </div>
+                    
+
+                    <div class="mui-button-row">
+                        <button id='btnUserSubmit' type="button" class="mui-btn mui-btn-primary" onclick="register();">提交</button>&nbsp;&nbsp;
+                        <!-- <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;">注册</button> -->
+                    </div>
+                </form>
+                <!-- <div class="mui-input-row" style="margin: 10px 5px;">
+                    <textarea id="textarea" rows="5" placeholder="多行文本框"></textarea>
+                </div> -->
+            </div>
+            <!-- <button type="button" onclick="ss();" class="mui-btn mui-btn-primary mui-btn-block">确定</button> -->
+            <!-- <button type="button" onclick="userLogin();" class="btn btn-default" type="button" >确定</button> -->
+            <!-- <button onclick="ser();" class="btn btn-default" type="button" >确定2</button> -->
+            
+        </div>
+    </body>
+    
+    
+    <script>
+        //var isUserExist = 0;//用户是否存在 0表示存在 ,1表示不存在
+        // var uName;
+        //用户注册
+        function register(){
+            var isUserExist = -1;
+                //检测是否已经登录
+                try {
+                    var uID = document.getElementById('userID').value;
+                    var uPW = document.getElementById('userPW').value;
+                    var rPW = document.getElementById('reuserPW').value;
+                    var email = document.getElementById('email').value;
+                    var phone = document.getElementById('phone').value;
+                    
+                    
+                    // if(!isEmail){
+                        // alert("请您输入正确的邮箱!");
+                    // }
+                    // alert(uID+uPW+rPW);
+                  
+                    if(uID.length>=6 && uPW.length>=6 && rPW.length>=6 && uPW==rPW && phone.length==11){
+                        // alert("222222222");
+                        
+                       //var uID = document.getElementById('userID').value;
+                       try{ //isUserExist = 0;//用户是否存在 0表示存在 ,1表示不存在
+                           $.ajax({
+                                type: "GET",
+                                url: "http://omp.sciinfo.cn/index/third/user/transferOneUserToClientJackson",
+                                data: {'loginName':uID},
+                                dataType: 'jsonp',
+                                jsonp: 'callback',
+                                success: function(data) {
+                                    //alert("come in 2 "+ data.error_code);
+                                    if(data.error_code == "PARAMS_EXCEPTION"){ //用户已经存在
+                                        //alert(data.error_code+"用户不存在可以注册");
+                                        //调用注册接口
+                                        //checkMail(email);
+                                        userReg();
+                                        //alert("注册成功!");
+                                        var htmlPath = "user_dl.html";
+                                        window.location.href = htmlPath;  
+                                    }
+                                    else{
+                                        alert("用户已经注册,请重新填写用户名!");  
+                                    }
+                                }
+                            });
+                        }
+                        catch(ex){
+                            alert(ex);
+                        }
+                    }
+                    else if(uID.length<6 || uPW.length<6 || rPW.length<6){
+                       alert("账号和密码长度至少为6个字符!");
+                       //location.reload(); 
+                    }
+                    else if(uPW!=rPW){
+                       alert("两次输入密码不一致,请重新输入!");
+                       //location.reload(); 
+                    }
+                    else if(phone.length<11 || phone.length>11){
+                       alert("请重新输入手机号码!");
+                       //location.reload(); 
+                    }
+                    
+                } catch (x) {
+                    //$closeToast();
+                    $alert("远程服务不可用,请稍后再试！");
+                }            
+        }
+        //用户是否存在
+        function userExist(){
+           var isUserExist1;
+           var uID = document.getElementById('userID').value;
+           try{ //isUserExist = 0;//用户是否存在 0表示存在 ,1表示不存在
+               $.ajax({
+                    type: "GET",
+                    url: "http://omp.sciinfo.cn/index/third/user/transferOneUserToClientJackson",
+                    data: {'loginName':uID},
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function(data) {
+                        //alert("come in 2 "+ data.error_code);
+                        if(data.error_code == "PARAMS_EXCEPTION"){ //用户已经存在
+                            //alert(data.error_code+"用户不存在可以注册");
+                            isUserExist1 = 1;
+                            //return isUserExist;  
+                        }
+                        else{
+                            alert("用户已经存在");
+                            isUserExist1 = 0;//用户已经存在
+                            //return isUserExist;  
+                        }
+                    }
+                });
+            }
+            catch(ex){
+                alert(ex);
+            }
+            //alert(isUserExist1);
+            return isUserExist1;   
+                
+        }
+        
+        //注册
+        function userReg(){
+           // alert("userReg!!");
+           var uID = document.getElementById('userID').value;
+           var uPW = document.getElementById('userPW').value;
+           var rPW = document.getElementById('reuserPW').value;
+           var email = document.getElementById('email').value;
+           var phone = document.getElementById('phone').value;
+           
+           try{//password=123456&email=123@123.com&phone=13512345678
+               $.ajax({
+                    type: "GET",
+                    url: "http://omp.sciinfo.cn/index/third/user/regUser",
+                    data: {'loginName':uID,'password':uPW,'email':email,'phone':phone},
+                    // data: {'loginName':"admin",'password':"123456"},
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function(data) {
+                        if(data.retCode=="SUCESS"){
+                            alert("注册成功!");
+                            //将用户名和密码写入到Cookie
+                            //SetCookie(usr, pwd, time);
+                            //跳转到已经登录页面
+                            //var htmlPath = "user_dlok.html?username="+usr;
+                            // var htmlPath = "user_dlok.html?username=admin";
+                            //window.location.href = htmlPath;
+                        }
+                        else{
+                            alert("输入邮箱有误,请重新输入!");
+                            //window.location.href = "user_dl.html";
+                        }
+                    }
+                    
+                    //没有使用的方法,ajax不支持在外部的方法返回值
+                    // success: function(data) {
+                        // if(data.retCode=="SUCESS"){ //
+                            // alert("注册成功!");
+                            // //将用户名和密码写入到Cookie
+                            // //SetCookie(usr, pwd, time);
+                            // //isUserExist = 0;
+                            // //alert("用户已经存在,请重新填写!");
+                            // //跳转到注册页面
+                            // //var htmlPath = "user_zc.html";
+                            // //window.location.href = htmlPath;
+                        // }
+                        // else{
+                            // //isUserExist = 1;//用户不存在可以注册
+                            // alert("注册服务失败!请稍后");
+                            // //window.location.href = "user_dl.html";
+                        // }
+                    // },
+                });
+            }
+            catch(ex){
+                alert(ex);
+            }
+            
+        }
+        
+        function checkMail(str){ 
+            var strReg=""; 
+            var r; 
+            var strText=document.all(str).value; 
+            //strReg=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/i;
+            strReg=/^\w+((-\w+)|(\.\w+))*\@{1}\w+\.{1}\w{2,4}(\.{0,1}\w{2}){0,1}/ig;
+            r=strText.search(strReg); 
+            if(r==-1) { 
+                alert("邮箱格式错误!"); 
+                document.all(str).focus();
+            } 
+        }
+
+        zy_init();
+        window.uexOnload = function(type){
+            if(!type)
+            {   
+                try {
+                    // //$toast("正在加载...");             
+                    // SOAPProxyFabric.fromUrl("http://omp.sciinfo.cn/index/third/user/authenticationUser", true, gotproxycallback);
+                } catch (x) {
+                    //$closeToast();
+                    $alert("远程服务不可用,请稍后再试...！");
+                }
+            }
+        }
+        
+
+    </script>      
+    
+</html>

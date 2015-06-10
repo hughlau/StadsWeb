@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title>引证报告查找</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+ 
+        <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        
+        <style>
+            html,
+            body {
+                background-color: #efeff4;
+            }
+            .title {
+                padding: 20px 15px 10px;
+                color: #6d6d72;
+                font-size: 15px;
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top" role="navigation"  style="background-color:#555;height:50px;border-bottom:1px #797979 solid;">
+            <div class="container">
+                <div class="row" style="margin-top:10px;margin-left:10px;margin-right:10px;border-bottom:1px #fff solid;">
+                    <div class="col-xs-6" style="font-size:20px;color:#fff;">
+                        引证查找
+                    </div>
+                    <div class="col-xs-6" style="height:28px;font-size:12px;color:#fff;text-align:right; vertical-align:text-bottom;">
+                        万方软件
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="main" style="padding-top:50px;padding-bottom:50px;"></div>
+        <!--底部按钮栏设置,图标在css样式文件夹中修改-->
+
+    </body>
+    <script>
+        var query = "*";
+        
+        function resultcallback(res, xml, text, proxy) {
+            //$closeToast();
+            alert("#######");
+            
+            var dataObj=eval("("+res+")");
+            
+            var html = "";
+            $("#main").append("<tr style=\"background-color:#034481;text-align:center\"><td style=\"width: 26%;color:white;\" id=\"spQKMC\" onclick=\"JournalSortBy('QKMC')\">刊名</td><td style=\"width: 10%;color:white;\" id=\"spZB\" onclick=\"JournalSortBy('ZB')\">总被引次数<script type=\"text/javascript\">JournalsUDImage('spZB')</script></td><td id=\"spYX\" onclick=\"JournalSortBy('YX')\" class=\"style2\">影响因子</td><td id=\"spJN\" onclick=\"JournalSortBy('JN')\" class=\"style2\">即年指标</td><td style=\"width: 9%;color: white;\" id=\"spTY\" onclick=\"JournalSortBy('TY')\">他引率</td><td id=\"spYYKS\" onclick=\"JournalSortBy('YYKS')\" class=\"style3\">引用刊数</td><td style=\"width: 9%;color: white;\" id=\"spKS\" onclick=\"JournalSortBy('KS')\">扩散因子</td><td style=\"width: 29%;color: white;\" id=\"Td1\">所属学科</td></tr>");
+            for(var i=0;i<dataObj.hits.total;i++){
+                alert(i);
+                // QKMC 刊名,
+                // ZB 总被引次数,
+                // YX 影响因子,
+                // JN 即年指标,
+                // TY 他引率,
+                // YYKS 引用刊数,
+                // KS 扩散因子,
+                // F26：所属学科      
+                var QKMC=dataObj.hits.hits[i]['_source']['qkmc'];
+                var ZB  =dataObj.hits.hits[i]['_source']['zb'];
+                var YX  =dataObj.hits.hits[i]['_source']['yc'];
+                var JN  =dataObj.hits.hits[i]['_source']['jn'];
+                var TY  =dataObj.hits.hits[i]['_source']['ty'];
+                var YYKS=dataObj.hits.hits[i]['_source']['yyks'];
+                var KS  =dataObj.hits.hits[i]['_source']['ks'];
+                var F26 =dataObj.hits.hits[i]['_source']['f26'];
+                alert(QKMC);
+                
+                // var expertId=dataObj.hits.hits[i]['_id']
+                // var work = dataObj.hits.hits[i]['_source']['work'];
+                
+                //$("#main").append('<div class="row"style="border-bottom:1px #797979 solid;"><div class="col-xs-2"><img src="../css/images/rentou.png" width="50" style="margin-top:10px;"></div><div class="col-xs-10"style="padding:10px;">姓名:<a href="zj_info.html?id='+expertId+'">'+experts+'</a></div><div class="col-xs-10"style="padding:10px;">工作:'+work+'</div></div>');
+            }
+        }
+        
+        function failurecallback(res, xml, text, proxy) {
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function gotproxycallback(proxy, wsdl, text) {
+            var pl = {
+                "userName":"infosoft",
+                "password":"infosoft",
+                "indexName":"cstpcd_analysis",
+                //"queryString":"_ID:"+query,
+                "queryString":"*",
+                "sortField":"",
+                "fields":"",
+                "pageNumber":"0",
+                "pagePerNo":"10",
+                "facets":"",
+                "fm":"@JSON"
+            };
+            if (proxy instanceof SOAPProxy) {
+               proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            } else {
+                alert("服务器连接失败，请稍后再试！");
+            }
+        }
+        
+        zy_init();
+        window.uexOnload = function(type){
+               
+                var params = zy_parse();
+                
+                if (params["q"])
+                {
+                    query = params["q"];
+                }
+                
+                try {
+                    SOAPProxyFabric.fromUrl("http://168.160.200.114/Search.svc?singlewsdl", true, gotproxycallback);
+                    uexWindow.toast(1,5,"正在加载...",0);
+                } catch (x) {
+                    alert("服务器连接失败，请稍后再试！");
+                }           
+            
+        }
+            
+    </script>
+</html>

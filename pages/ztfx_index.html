@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>主题首页</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+
+ 
+        <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">         
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        
+        
+    </head>
+    <body>
+        
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="backHome();" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1">
+                <form method="get" action="ztfx_info.html">
+                <tr>
+                    <td><input name="name" class="input1" id="serValue" type="text"></td>
+                    <td><button type="submit" class="button1" onclick="return isnull();">查</button></td>
+                </tr>
+                </form>
+            </table>
+        </div>
+        
+    	<div class="CXZS2015_bd2" id="main">
+    	    <div class="CXZS2015_ZT_hot">
+    	        <div class="z_title">热门关键词</div>
+        	    <table class="z_TB">
+                    <!-- 共有 td1~td12 十二种颜色 -->
+                    <tr>
+                        <td class="td1"><a href="ztfx_info.html?name=大气污染">大气污染</a></td>
+                        <td class="td2"><a href="ztfx_info.html?name=食品安全">食品安全</a></td>
+                        <td class="td3"><a href="ztfx_info.html?name=物流仓储">物流仓储</a></td>
+                    </tr>
+                </table>
+                <table class="z_TB">
+                    <tr>
+                        <td class="td4"><a href="ztfx_info.html?name=页岩气">页岩气</a></td>
+                        <td class="td5"><a href="ztfx_info.html?name=石墨烯">石墨烯</a></td>
+                        <td class="td6"><a href="ztfx_info.html?name=光伏电池">光伏电池</a></td>                        
+                    </tr>
+                </table>
+                <table class="z_TB">
+                    <tr>
+                        <td class="td7"><a href="ztfx_info.html?name=北斗导航">北斗导航</a></td>
+                        <td class="td8"><a href="ztfx_info.html?name=西部生态补偿">西部生态补偿</a></td>
+                        <td class="td9"><a href="ztfx_info.html?name=物联网">物联网</a></td>
+                    </tr>
+                </table>
+    	    </div>
+    	    
+    	</div>
+    	
+		<div id="bottom" class="CXZS2015_bottom_all">
+        </div>
+
+    </body>
+	<script>
+		
+    	zy_init();
+        window.uexOnload = function(type){
+			if(!type)
+			{
+				
+			}
+        }
+		function isnull(){
+            if($("#serValue").val()!=''){
+                return true;
+            }else if($("#serValue").val()==''){
+                alert("检索词不能为空!");
+                return false;
+            }
+        }
+		function backHome(){
+            window.location.href="../index.html";
+        }	
+	</script>
+</html>

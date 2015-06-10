@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title>引证报告列表</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+           
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <script src="../js/highcharts.js"></script>
+		<style>
+			.selectSearch{
+				background-color:#0066FF;
+				padding:5px;color:#fff;
+			}
+			div{font-size:12px;}
+		</style>
+    </head>
+    <body>
+    	<div class="navbar navbar-fixed-top" role="navigation"  style="background-color:#555;height:50px;border-bottom:1px #797979 solid;">
+    		<div class="container">
+    			<div class="row" style="margin-top:10px;margin-left:10px;margin-right:10px;border-bottom:1px #fff solid;">
+    				<div class="col-xs-6" style="font-size:20px;color:#fff;">
+    					引证报告
+					</div>
+					<div class="col-xs-6" style="height:28px;font-size:12px;color:#fff;text-align:right; vertical-align:text-bottom;">
+						万方软件
+					</div>
+				</div>
+    		</div>
+    	</div>
+		<div class="container" id="main" style="padding-top:50px;padding-bottom:50px;">
+			<div class="row" style="margin-top:15px;">
+				<img src="../css/images/yzbg.png" width="50"><span style='font-size:20px;font-family:"Arial Black"; font-weight:bold;'>报告列表</span>
+			</div>
+			<div class="row">
+				<table class="table table-bordered table-condensed" style="width:95%;margin:0 auto;">
+					<tr style="background-color:#ffffcc;">
+						<td style="text-align:center;">刊名</td>
+						<td style="text-align:center;">影响因子</td>
+						<td style="text-align:center;">他引率</td>
+						<td style="text-align:center;">其他信息</td>
+					</tr>
+					<tr>
+						<td>浙江大学</td>
+						<td>228503</td>
+						<td>18661</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>浙江工业大学</td>
+						<td>36637</td>
+						<td>5069</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>浙江理工大学</td>
+						<td>15793</td>
+						<td>2701</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>宁波大学</td>
+						<td>28525</td>
+						<td>1475</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>浙江师范大学</td>
+						<td>40784</td>
+						<td>562</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>中国计量学院</td>
+						<td>9635</td>
+						<td>2211</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>杭州电子科技大学</td>
+						<td>14675</td>
+						<td>2377</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>浙江工商大学</td>
+						<td>22714</td>
+						<td>470</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>温州医学院</td>
+						<td>33625</td>
+						<td>348</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>浙江中医药大学</td>
+						<td>18006</td>
+						<td>70</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>杭州师范大学</td>
+						<td>20033</td>
+						<td>332</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>中国美术学院</td>
+						<td>3175</td>
+						<td>965</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>浙江科技学院</td>
+						<td>6077</td>
+						<td>1356</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>浙江农林大学</td>
+						<td>11191</td>
+						<td>453</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+					<tr>
+						<td>温州大学</td>
+						<td>16352</td>
+						<td>300</td>
+						<td><a href="yzbg_info.html">查看详情</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+    	<div id="bottom" class="navbar navbar-fixed-bottom" role="navigation" style="background-color:#cecece;">
+    	</div>
+    </body>
+	<script>
+		function ser(){
+			window.sessionStorage.setItem("serValue",$("#serValue").val());
+			if($("select option:selected").val()=="ser"){
+				window.location.href='serjg_list.html';
+			}else{
+				window.location.href='tuijg_list.html';
+			}
+		}
+		
+    	zy_init();
+        window.uexOnload = function(type){
+			if(!type)
+			{
+//				if(localStorage.getItem("indexPass")!="ok"){
+//					window.location.href="welcome.html";
+//				}
+				$("#searchBtn").css("font-size",$("#main").width()/20);
+				$("#bottom").find("img").css("width",($("#main").width()/14.5)*2);
+				$("#key").css({"height":($("#main").width()/14.5)*2,"font-size":$("#main").width()/14.5});
+				//$("#main").css({"padding-top":($("#main").width()/10)*2,"padding-bottom":($("#main").width()/14.5)*5});
+				//$("#main").find("div").css({"margin-top":$("#main").width()/14.5,"margin-left":$("#main").width()/14.5,"font-size":$("#main").width()/14.5});
+				$("#key").val(window.sessionStorage.getItem("key"));		        
+			}
+        }
+		
+		$(document).ready(function(){
+//				if(localStorage.getItem("indexPass")!="ok"){
+//					window.location.href="welcome.html";
+//				}
+			$("#searchBtn").css("font-size",$("#main").width()/14.5);
+			$("#bottom").find("img").css("width",($("#main").width()/14.5)*2);
+			$("#key").css({"height":($("#main").width()/14.5)*2,"font-size":$("#main").width()/14.5});
+			//$("#main").css({"padding-top":($("#main").width()/14.5)*2,"padding-bottom":($("#main").width()/14.5)*5});
+			//$("#main").find("div").css({"margin-top":$("#main").width()/14.5,"margin-left":$("#main").width()/14.5,"font-size":$("#main").width()/14.5});
+			$("#key").val(window.sessionStorage.getItem("key"));
+//			$("#searchBtn a").each(function(){
+//				$(this).click(function(){
+//					if($(this).attr("class")!="selectSearch"){
+//						$(this).addClass("selectSearch");
+//						$(".input-group-addon").click(function(){
+//							openwind(2);
+//						});
+//					}
+//				});
+//			});
+
+			$(".input-group-addon").unbind();
+			$(".input-group-addon").click(function(){
+				openwind(2);
+			});
+			
+		});
+			
+	</script>
+</html>

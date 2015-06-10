@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="StadsWeb.Service.esService" CodeBehind="esService.svc.cs" %>

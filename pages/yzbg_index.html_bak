@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title>引证报告首页</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+           
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <script src="../js/highcharts.js"></script>
+		<style>
+			.selectSearch{
+				background-color:#0066FF;
+				padding:5px;color:#fff;
+			}
+			div{font-size:12px;}
+			
+	        .showDiv{
+	            width: 200px;;
+	            height:100%;
+	            background-color: #FFFFCC;
+	            position: fixed;
+	            top: 0px;
+	            right: 0px;
+	            z-index:9999999999999;
+	            -webkit-box-shadow: 0 7px 21px rgba(0,0,0,0.15);
+	            -moz-box-shadow: 0 7px 21px rgba(0,0,0,0.15);
+	            box-shadow: 0 7px 21px rgba(0,0,0,0.15);
+	            -webkit-backface-visibility: hidden;
+	            -webkit-perspective: 1000;
+	            overflow-y: auto;
+	            overflow-x: hidden;
+	            border-left: 1px #CCC solid;
+	            display: none;
+	        }
+			.li{
+				list-style:none; 
+				border-bottom:solid 1px #000;
+				padding:10px;
+			}
+		</style>
+    </head>
+    <body>
+    	<div class="navbar navbar-fixed-top" role="navigation"  style="background-color:#555;height:50px;border-bottom:1px #797979 solid;">
+    		<div class="container">
+    			<div class="row" style="margin-top:10px;margin-left:10px;margin-right:10px;border-bottom:1px #fff solid;">
+    				<div class="col-xs-6" style="font-size:20px;color:#fff;" id="name">
+    					引证报告
+					</div>
+					<div class="col-xs-6" style="height:28px;font-size:12px;color:#fff;text-align:right; vertical-align:text-bottom;">
+						万方软件
+					</div>
+				</div>
+    		</div>
+    	</div>
+		<div class="container" id="main" style="padding-top:50px;padding-bottom:100px;">
+			<div class="row" style="margin-top:20px;">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-10" style="background-color:#FFFFCC;padding:10px;">
+					选择年份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img height="20" src="../css/images/youjiantou.png" onclick="showDiv('nianfen');"/><span id="date"></span>
+				</div>
+				<div class="col-xs-1"></div>
+			</div>
+			<div class="row" style="margin-top:20px;">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-10" style="background-color:#FFFFCC;padding:10px;">
+					选择学科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img height="20" src="../css/images/youjiantou.png" onclick="showDiv('xueke');"><span id="xueke"></span>
+				</div>
+				<div class="col-xs-1"></div>
+			</div>
+			<div class="row" style="margin-top:20px;">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-10" style="background-color:#FFFFCC;padding:10px;">
+					选择排序字段&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img height="20" src="../css/images/youjiantou.png" onclick="showDiv('paixu');"><span id="paixu"></span>
+				</div>
+				<div class="col-xs-1"></div>
+			</div>
+			<div class="row" style="margin-top:20px;">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-10" style="background-color:#FFFFCC;padding:10px;">
+					刊名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input/>
+				</div>
+				<div class="col-xs-1"></div>
+			</div>
+			<div class="row" style="margin-top:20px;">
+				<div class="col-xs-12" style=" text-align:center;">
+					<button onclick="ser();" class="btn btn-default" type="button">检索</button>
+				</div>
+			</div>
+		</div>
+    	<div id="bottom" class="navbar navbar-fixed-bottom" role="navigation" style="background-color:#cecece;">
+    	</div>
+    	<div id="showDiv" class="showDiv">
+    	</div>
+    </body>
+	<script>
+		
+		function selectDate(obj){
+			$("#date").html($(obj).html());
+            $("#showDiv").animate({
+                width:'hide'
+            }, "fast");
+		}
+		
+		function selectPaixu(obj){
+			$("#paixu").html($(obj).html());
+            $("#showDiv").animate({
+                width:'hide'
+            }, "fast");
+		}
+		
+		function selectXueke(obj){
+			$("#xueke").html($(obj).html());
+            $("#showDiv").animate({
+                width:'hide'
+            }, "fast");
+		}
+		
+			function showDiv(showType){
+		    	$("#showDiv").animate({width:'toggle'},"fast",function(){
+				if(showType=="nianfen"){
+					$("#showDiv").html('<li class="li"onclick="selectDate(this);">2013</li><li class="li"onclick="selectDate(this);">2012</li><li class="li"onclick="selectDate(this);">2011</li><li class="li"onclick="selectDate(this);">2010</li><li class="li"onclick="selectDate(this);">2009</li>');
+				}
+				if(showType=="paixu"){
+					$("#showDiv").html('<li class="li"onclick="selectPaixu(this);">总被引频次</li><li class="li"onclick="selectPaixu(this);">影响因子</li><li class="li"onclick="selectPaixu(this);">即年指标</li><li class="li"onclick="selectPaixu(this);">引用刊数</li><li class="li"onclick="selectPaixu(this);">扩散因子</li>');
+				}
+				if(showType=="xueke"){
+					$("#showDiv").html('<li class="li" onclick="selectXueke(this);" value="儿科学类">儿科学类</li><li class="li" onclick="selectXueke(this);" value="妇产科学类">妇产科学类</li><li class="li" onclick="selectXueke(this);" value="测绘科学技术类">测绘科学技术类</li><li class="li" onclick="selectXueke(this);" value="畜牧、兽医科学类">畜牧、兽医科学类</li><li class="li" onclick="selectXueke(this);" value="航空、航天科学技术类">航空、航天科学技术类</li><li class="li" onclick="selectXueke(this);" value="电气工程类">电气工程类</li><li class="li" onclick="selectXueke(this);" value="机械工程设计类">机械工程设计类</li><li class="li" onclick="selectXueke(this);" value="石油天然气工程类">石油天然气工程类</li><li class="li" onclick="selectXueke(this);" value="内科学综合类">内科学综合类</li><li class="li" onclick="selectXueke(this);" value="药学类">药学类</li><li class="li" onclick="selectXueke(this);" value="药理学类">药理学类</li><li class="li" onclick="selectXueke(this);" value="神经病学、精神病学类">神经病学、精神病学类</li><li class="li" onclick="selectXueke(this);" value="矿山工程技术类">矿山工程技术类</li><li class="li" onclick="selectXueke(this);" value="呼吸病学、结核病学类">呼吸病学、结核病学类</li><li class="li" onclick="selectXueke(this);" value="水路运输类">水路运输类</li><li class="li" onclick="selectXueke(this);" value="内分泌病学与代谢病学、风湿病学类">内分泌病学与代谢病学、风湿病学类</li><li class="li" onclick="selectXueke(this);" value="水文学、海洋科学类">水文学、海洋科学类</li><li class="li" onclick="selectXueke(this);" value="中医学类">中医学类</li><li class="li" onclick="selectXueke(this);" value="核医学、医学影像学类">核医学、医学影像学类</li><li class="li" onclick="selectXueke(this);" value="生物医学工程学类">生物医学工程学类</li><li class="li" onclick="selectXueke(this);" value="工程技术大学学报类">工程技术大学学报类</li><li class="li" onclick="selectXueke(this);" value="中医药大学学报类">中医药大学学报类</li><li class="li" onclick="selectXueke(this);" value="血液病学、肾脏病学类">血液病学、肾脏病学类</li><li class="li" onclick="selectXueke(this);" value="兵器科学与技术类">兵器科学与技术类</li><li class="li" onclick="selectXueke(this);" value="生物学基础学科类">生物学基础学科类</li><li class="li" onclick="selectXueke(this);" value="微生物学、病毒学类">微生物学、病毒学类</li><li class="li" onclick="selectXueke(this);" value="临床诊断学类">临床诊断学类</li><li class="li" onclick="selectXueke(this);" value="园艺学类">园艺学类</li><li class="li" onclick="selectXueke(this);" value="耳鼻咽喉科学类">耳鼻咽喉科学类</li><li class="li" onclick="selectXueke(this);" value="安全科学技术类">安全科学技术类</li><li class="li" onclick="selectXueke(this);" value="通信技术类">通信技术类</li><li class="li" onclick="selectXueke(this);" value="仪器仪表技术类">仪器仪表技术类</li><li class="li" onclick="selectXueke(this);" value="机械制造工艺与设备类">机械制造工艺与设备类</li><li class="li" onclick="selectXueke(this);" value="地质学类">地质学类</li><li class="li" onclick="selectXueke(this);" value="植物学类">植物学类</li><li class="li" onclick="selectXueke(this);" value="感染性疾病学、传染病学类">感染性疾病学、传染病学类</li><li class="li" onclick="selectXueke(this);" value="数学类">数学类</li><li class="li" onclick="selectXueke(this);" value="农业大学学报类">农业大学学报类</li><li class="li" onclick="selectXueke(this);" value="水产学类">水产学类</li><li class="li" onclick="selectXueke(this);" value="信息与系统科学相关工程与技术类">信息与系统科学相关工程与技术类</li><li class="li" onclick="selectXueke(this);" value="纺织科学技术类">纺织科学技术类</li><li class="li" onclick="selectXueke(this);" value="物理学类">物理学类</li><li class="li" onclick="selectXueke(this);" value="冶金工程技术类">冶金工程技术类</li><li class="li" onclick="selectXueke(this);" value="工程与技术科学基础学科类">工程与技术科学基础学科类</li><li class="li" onclick="selectXueke(this);" value="计算机科学技术类">计算机科学技术类</li><li class="li" onclick="selectXueke(this);" value="医药大学学报类">医药大学学报类</li><li class="li" onclick="selectXueke(this);" value="应用化学工程类">应用化学工程类</li><li class="li" onclick="selectXueke(this);" value="交通运输工程类">交通运输工程类</li><li class="li" onclick="selectXueke(this);" value="铁路运输类">铁路运输类</li><li class="li" onclick="selectXueke(this);" value="烧伤外科学、整形外科学类">烧伤外科学、整形外科学类</li><li class="li" onclick="selectXueke(this);" value="金属材料类">金属材料类</li><li class="li" onclick="selectXueke(this);" value="环境科学技术及资源科学技术类">环境科学技术及资源科学技术类</li><li class="li" onclick="selectXueke(this);" value="电子技术类">电子技术类</li><li class="li" onclick="selectXueke(this);" value="昆虫学、动物学类">昆虫学、动物学类</li><li class="li" onclick="selectXueke(this);" value="外科学综合类">外科学综合类</li><li class="li" onclick="selectXueke(this);" value="泌尿外科学类">泌尿外科学类</li><li class="li" onclick="selectXueke(this);" value="保健医学类">保健医学类</li><li class="li" onclick="selectXueke(this);" value="图书馆、情报与文献学、传播学类">图书馆、情报与文献学、传播学类</li><li class="li" onclick="selectXueke(this);" value="地球科学综合类">地球科学综合类</li><li class="li" onclick="selectXueke(this);" value="材料科学综合类">材料科学综合类</li><li class="li" onclick="selectXueke(this);" value="植物保护学类">植物保护学类</li><li class="li" onclick="selectXueke(this);" value="光电子学与激光技术类">光电子学与激光技术类</li><li class="li" onclick="selectXueke(this);" value="高聚物工程类">高聚物工程类</li><li class="li" onclick="selectXueke(this);" value="针灸、中医骨伤类">针灸、中医骨伤类</li><li class="li" onclick="selectXueke(this);" value="生物工程类">生物工程类</li><li class="li" onclick="selectXueke(this);" value="土壤学类">土壤学类</li><li class="li" onclick="selectXueke(this);" value="管理学类">管理学类</li><li class="li" onclick="selectXueke(this);" value="基础医学类">基础医学类</li><li class="li" onclick="selectXueke(this);" value="口腔医学类">口腔医学类</li><li class="li" onclick="selectXueke(this);" value="核科学技术类">核科学技术类</li><li class="li" onclick="selectXueke(this);" value="优生学、计划生育学类">优生学、计划生育学类</li><li class="li" onclick="selectXueke(this);" value="师范大学学报类">师范大学学报类</li><li class="li" onclick="selectXueke(this);" value="卫生管理学、健康教育学类">卫生管理学、健康教育学类</li><li class="li" onclick="selectXueke(this);" value="肿瘤学类">肿瘤学类</li><li class="li" onclick="selectXueke(this);" value="医学综合类">医学综合类</li><li class="li" onclick="selectXueke(this);" value="林学类">林学类</li><li class="li" onclick="selectXueke(this);" value="心理学类">心理学类</li><li class="li" onclick="selectXueke(this);" value="天文学类">天文学类</li><li class="li" onclick="selectXueke(this);" value="中西医结合医学类">中西医结合医学类</li><li class="li" onclick="selectXueke(this);" value="其他学科类">其他学科类</li><li class="li" onclick="selectXueke(this);" value="预防医学与公共卫生学综合类">预防医学与公共卫生学综合类</li><li class="li" onclick="selectXueke(this);" value="临床医学综合类">临床医学综合类</li><li class="li" onclick="selectXueke(this);" value="地球物理学类">地球物理学类</li><li class="li" onclick="selectXueke(this);" value="化学类">化学类</li><li class="li" onclick="selectXueke(this);" value="农业工程类">农业工程类</li><li class="li" onclick="selectXueke(this);" value="土木工程类">土木工程类</li><li class="li" onclick="selectXueke(this);" value="化学工程类">化学工程类</li><li class="li" onclick="selectXueke(this);" value="水利工程类">水利工程类</li><li class="li" onclick="selectXueke(this);" value="食品科学技术类">食品科学技术类</li><li class="li" onclick="selectXueke(this);" value="精细化学工程类">精细化学工程类</li><li class="li" onclick="selectXueke(this);" value="能源科学综合类">能源科学综合类</li><li class="li" onclick="selectXueke(this);" value="综合大学学报类">综合大学学报类</li><li class="li" onclick="selectXueke(this);" value="军事医学与特种医学类">军事医学与特种医学类</li><li class="li" onclick="selectXueke(this);" value="护理学类">护理学类</li><li class="li" onclick="selectXueke(this);" value="骨外科学类">骨外科学类</li><li class="li" onclick="selectXueke(this);" value="心血管病学类">心血管病学类</li><li class="li" onclick="selectXueke(this);" value="动力工程类">动力工程类</li><li class="li" onclick="selectXueke(this);" value="地理学类">地理学类</li><li class="li" onclick="selectXueke(this);" value="流行病学、环境医学类">流行病学、环境医学类</li><li class="li" onclick="selectXueke(this);" value="大气科学类">大气科学类</li><li class="li" onclick="selectXueke(this);" value="信息科学与系统科学类">信息科学与系统科学类</li><li class="li" onclick="selectXueke(this);" value="普通外科学、胸外科学、心血管外科学类">普通外科学、胸外科学、心血管外科学类</li><li class="li" onclick="selectXueke(this);" value="生态学类">生态学类</li><li class="li" onclick="selectXueke(this);" value="中药学类">中药学类</li><li class="li" onclick="selectXueke(this);" value="农学类">农学类</li><li class="li" onclick="selectXueke(this);" value="力学类">力学类</li><li class="li" onclick="selectXueke(this);" value="眼科学类">眼科学类</li><li class="li" onclick="selectXueke(this);" value="建筑科学与技术类">建筑科学与技术类</li><li class="li" onclick="selectXueke(this);" value="综合类">综合类</li><li class="li" onclick="selectXueke(this);" value="皮肤病学、性医学类">皮肤病学、性医学类</li><li class="li" onclick="selectXueke(this);" value="消化病学类">消化病学类</li><li class="li" onclick="selectXueke(this);" value="农艺学类">农艺学类</li><li class="li" onclick="selectXueke(this);" value="公路运输类">公路运输类</li>');
+				}
+		    });
+		    var e=arguments.callee.caller.arguments[0]||event; //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+		    if (e && e.stopPropagation) {
+		        // this code is for Mozilla and Opera
+		        e.stopPropagation();
+		    } else if (window.event) {
+		        // this code is for IE
+		        window.event.cancelBubble = true;
+		    }
+		    event.stopPropagation();
+		}
+
+    	jQuery.fn.isChildAndSelfOf = function(b){ return (this.closest(b).length > 0); };
+	    document.onclick=
+	            function(event){
+	                if(!$(event.target).isChildAndSelfOf("#showDiv")){
+	                    $("#showDiv").animate({
+	                        width:'hide'
+	                    }, "fast");
+	                }
+	            };
+		function QueryString()
+		{
+			var name,value,i;
+			var str=location.href;
+			var num=str.indexOf("?")
+			str=str.substr(num+1);
+			var arrtmp=str.split("&");
+			for(i=0;i < arrtmp.length;i++){
+				num=arrtmp[i].indexOf("=");
+				if(num>0){
+					name=arrtmp[i].substring(0,num);
+					value=arrtmp[i].substr(num+1);
+					this[name]=value;
+				}
+			}
+		}
+
+		
+		function resultcallback(res, xml, text, proxy) {
+			uexWindow.closeToast();
+			var query = window.sessionStorage.getItem("key");
+			var dataObj=eval("("+res+")");
+			
+			var testStr = "";
+			var html = "";
+				//alert(getOrgByExperts(experts));
+				//$("#name").html(dataObj.hits.hits[0]['_source']['name']);
+				//var org=dataObj.hits.hits[0]['_source']['org'];
+				//alert(org);
+				//var data = getOrgByExperts(experts);
+				//alert(data);
+				//var returnRes=eval("("+getOrgByExperts(experts)+")");
+				//var org=returnRes.hits.total>0?returnRes.hits.hits[0]['_source']['org']:"";
+				//var expertId = returnRes.hits.total>0?returnRes.hits.hits[0]['_id']:"";
+				//alert("experts:"+experts+",org:"+org+",expertId:"+expertId);
+				//$("#main").append('<div class="row"style="border-bottom:1px #797979 solid;"><div class="col-xs-2"><img src="../css/images/rentou.png" width="50" style="margin-top:10px;"></div><div class="col-xs-10"style="padding:10px;">姓名:<a href="qqzkinfo.html?name='+experts+'">'+experts+'</a></div></div>');
+            //alert(dataObj.hits.hits);
+        }
+        function failurecallback(res, xml, text, proxy) {
+            alert("SayHello() failed");
+        }
+        function gotproxycallback(proxy, wsdl, text) {
+			var Request=new QueryString();
+			var id=Request["id"];
+	        var pl = {
+	            "userName":"infosoft",
+	            "password":"infosoft",
+				"indexName":"wf_mds_experts",
+	            "queryString":"_id:"+id,
+				"sortField":"",
+				"fields":"",
+				"pageNumber":"0",
+				"pagePerNo":"5",
+				"facets":"",
+	            "fm":"@JSON"
+	        };
+            if (proxy instanceof SOAPProxy) {
+               proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            } else {
+                alert("Proxy not created!");
+            }
+        }
+		
+		function soapStart(){
+			window.sessionStorage.clear();
+			window.sessionStorage.setItem("key",$("#key").val());
+	        try {
+	            SOAPProxyFabric.fromUrl("http://168.160.200.114/Search.svc?singlewsdl", true, gotproxycallback);
+			   	uexWindow.toast(1,5,"正在加载...",0);
+	        } catch (x) {
+	            alert("Failed to load or parse WSDL!");
+	        }
+		}
+		
+		function ser(){
+			window.location.href='yzbg_list.html';
+		}
+		
+		
+    	zy_init();
+        window.uexOnload = function(type){
+			if(!type)
+			{
+//				if(localStorage.getItem("indexPass")!="ok"){
+//					window.location.href="welcome.html";
+//				}
+				$("#searchBtn").css("font-size",$("#main").width()/20);
+				$("#bottom").find("img").css("width",($("#main").width()/14.5)*2);
+				$("#key").css({"height":($("#main").width()/14.5)*2,"font-size":$("#main").width()/14.5});
+				//$("#main").css({"padding-top":($("#main").width()/10)*2,"padding-bottom":($("#main").width()/14.5)*5});
+				//$("#main").find("div").css({"margin-top":$("#main").width()/14.5,"margin-left":$("#main").width()/14.5,"font-size":$("#main").width()/14.5});
+				$("#key").val(window.sessionStorage.getItem("key"));		        
+				try {
+		            SOAPProxyFabric.fromUrl("http://168.160.200.114/Search.svc?singlewsdl", true, gotproxycallback);
+					uexWindow.toast(1,5,"正在加载...",0);
+		        } catch (x) {
+		            alert("Failed to load or parse WSDL!");
+		        }	        
+			}
+        }
+		
+		$(document).ready(function(){
+			
+			$('#pie').highcharts({
+	            chart: {
+	                plotBackgroundColor: null,
+	                plotBorderWidth: null,
+	                plotShadow: false
+	            },
+	            title: {
+	                text: '成果产出'
+	            },
+		        credits: {
+		            enabled: false
+		        },
+	            plotOptions: {
+	                pie: {
+	                    allowPointSelect: false,
+	                    dataLabels: {
+	                        enabled: false
+	                    },
+	                    showInLegend: true
+	                }
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'middle',
+	                borderWidth: 0
+	            },
+	            series: [{
+	                type: 'pie',
+	                name: 'Browser share',
+	                data: [
+	                    ['期刊',53],
+	                    ['成果1',40],
+	                    ['会议',1]
+	                ]
+	            }]
+	        });
+			
+		 	$('#line').highcharts({
+		        chart: {
+		            type: 'spline'
+		        },
+		        title: {
+		            text: '发文数量年度分布图'
+		        },
+		        xAxis: {
+		            categories:  [
+	                    ['2010',53],
+	                    ['2011',40],
+	                    ['2012',1],
+	                    ['2013',1],
+	                    ['2014',1]
+	                ],
+		            labels: {
+		                enabled: false
+		            }
+		        },
+		        yAxis: {
+		            min: 0,
+		            title:""
+		        },
+		        exporting: {
+		            enabled: false
+		        },
+		        credits: {
+		            enabled: false,
+		            href: " ",
+		            text: ' '
+		        },
+		        plotOptions: {
+		            spline: {
+		                lineWidth: 4,
+		                states: {
+		                    hover: {
+		                        lineWidth: 5
+		                    }
+		                },
+		                marker: {
+		                    enabled: false
+		                }
+		            }
+		        },
+		        series: [{
+		            name: '年份',
+		            data:  [
+	                    ['2010',53],
+	                    ['2011',40],
+	                    ['2012',1],
+	                    ['2013',1],
+	                    ['2014',1]
+	                ]
+		
+		        }]
+		            ,
+		        navigation: {
+		            menuItemStyle: {
+		                fontSize: '10px'
+		            }
+		        }
+		    });	
+//				if(localStorage.getItem("indexPass")!="ok"){
+//					window.location.href="welcome.html";
+//				}
+			$("#searchBtn").css("font-size",$("#main").width()/14.5);
+			$("#bottom").find("img").css("width",($("#main").width()/14.5)*2);
+			$("#key").css({"height":($("#main").width()/14.5)*2,"font-size":$("#main").width()/14.5});
+			//$("#main").css({"padding-top":($("#main").width()/14.5)*2,"padding-bottom":($("#main").width()/14.5)*5});
+			//$("#main").find("div").css({"margin-top":$("#main").width()/14.5,"margin-left":$("#main").width()/14.5,"font-size":$("#main").width()/14.5});
+			$("#key").val(window.sessionStorage.getItem("key"));
+//			$("#searchBtn a").each(function(){
+//				$(this).click(function(){
+//					if($(this).attr("class")!="selectSearch"){
+//						$(this).addClass("selectSearch");
+//						$(".input-group-addon").click(function(){
+//							openwind(2);
+//						});
+//					}
+//				});
+//			});
+
+			$(".input-group-addon").unbind();
+			$(".input-group-addon").click(function(){
+				openwind(2);
+			});
+			
+		});
+			
+	</script>
+</html>

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>主题信息</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+           
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <script src="../js/highcharts.js"></script>
+        
+                
+        <!-- ECharts单文件引入 -->
+        <script src="../chart/js/echarts.js"></script>
+        <script src="../chart/js/snowdata.js"></script>
+
+        
+        <!-- 选项卡  -->
+        <script src="../js/tools.tabs-1.0.4.min.js"></script>
+                     <!-- 保存图片 lbt 20150331  -->
+        <script src="../js/canvg.js"></script>
+        <script src="../js/saveimage.js"></script>
+        <!--分享-->
+                <script>
+            var Image_Type='';
+            var Image_Title='';
+            var Image_ID='';
+            var Image_DesID='';
+        </script>
+        <script src="../js/weChat.js"></script>
+        <script src="../js/sina.js"></script>
+        <script src="../js/shareImages.js"></script>
+<script src="../js/filehelper.js"></script>
+    </head>
+    <body>
+    <div class="CXZS2015_Big_shaddow">
+        <div class="FX_main">
+            <div class="FX_main_div">
+                <div class="FX_title">分享操作：</div>
+                <div class="FX_links">
+                    <a href="javascript:void(0);" onclick="shareImgWithWeChat(0);"><img src="../images/FX_ico_1.png"><br/>微信好友</a>
+                    <a href="javascript:void(0);" onclick="shareImgWithWeChat(1);"><img src="../images/FX_ico_2.png"><br/>朋友圈</a>
+                    <a href="javascript:void(0);" onclick="shareImgWithSina();"><img src="../images/FX_ico_3.png"><br/>新浪微博</a>
+                    <a href="javascript:void(0);" onclick="shareWithQQ();"><img src="../images/FX_ico_4.png"><br/>Q Q</a>
+                    <a href="javascript:void(0);" onclick="shareWithQQZone();"><img src="../images/FX_ico_5.png"><br/>QQ空间</a>
+                    <a href="javascript:void(0);" onclick="shareImgToLocal();"><img src="../images/FX_ico_6.png"><br/>保存到本地</a>
+                    <div class="CXZS2015_clear"></div>
+                </div>
+                <a href="javascript:void(0);" class="FX_button">取 消</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    <!--点分享按钮-->
+    $(function(){
+        $('.CXZS2015_Share').click(function(){
+            $('.CXZS2015_Big_shaddow').fadeIn('fast');
+            Image_Type=this.dataset && this.dataset.imagetype;
+            Image_Title=this.dataset && this.dataset.imagetitle;
+            Image_ID=this.dataset && this.dataset.imageid;
+            Image_DesID=this.dataset && this.dataset.imagedesid;
+        });
+        $('.FX_button').click(function(){
+            $('.CXZS2015_Big_shaddow').fadeOut('fast');
+            Image_Type='';
+            Image_Title='';
+            Image_ID='';
+            Image_DesID='';
+        });
+    });
+    </script>   
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="historyBack();" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1" cellpadding="0" cellspacing="0">
+                <form method="get" action="ztfx_info.html">
+                <tr>
+                    <td><input name="name" class="input1" id="serValue" type="text"></td>
+                    <td><button type="submit" class="button1" onclick="return isnull();">查</button></td>
+                </tr>
+                </form>
+            </table>
+        </div>
+        
+        <div class="CXZS2015_bd3" id="main">
+            <div class="CXZS2015_ZT_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic1.png"/>
+                <span class="j_tt">学术热度走势</span>
+                <div id='xsrd_div' class="CXZS2015_Share" data-ImageType='svg' data-ImageTitle='学术热度走势' data-ImageID='line_1' data-ImageDesID='xszs_ZT_xishu'>
+<!--                     <a herf="javascript:void(0)" class="a_share" >
+                        <img alt="" src="../images/CXZS_share_3.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a> -->
+                </div>
+                <div class="CXZS2015_clear"></div>
+            </div>            
+
+            <div class="CXZS2015_ZT_pic">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="line" style="margin: 0 auto;height:200px;">
+                        </div>
+                        <div id="line_1" style="margin: 0 auto;height:200px;display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="xszs_ZT_xishu" class="CXZS2015_ZT_txt">
+                <!--主题词：<span class="z_word">大数据</span>-->
+            </div> 
+
+<!--@@@@@@@@@@@@@@@@@@@  选项卡  @@@@@@@@@@@@@@@@@@@-->
+            <div class="CXZS2015_ZT_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic1.png"/>
+                <div class="card_nav" id="card_nav">
+                    <a>相关学术主题</a>
+                    <!-- <a>最新学术主题</a> -->
+                </div>                
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_TB" id="card_div">
+                <table class="z_TB1">
+                    <tr>
+                        <td style="width:3rem;">序 号</td>
+                        <td>主题词</td>
+                        <td style="width:3rem;">热 度</td>
+                    </tr>
+                </table>
+                <div>
+                    <div id="tb_zx"></div>
+                    <div id="xgzt_ZT_word" class="CXZS2015_ZT_txt"></div>
+                </div>
+                <div>
+                    <div id="tb_xg"></div>
+                    <div id="xszs_ZT_word" class="CXZS2015_ZT_txt"></div>
+                </div>
+            </div>
+            <div class="CXZS2015_ZT_word"></div>
+                                       
+            <script>
+                $(function(){
+                    $('#card_nav').tabs('#card_div > div' , {history:true});
+
+                });
+            </script>
+            
+
+            <!--end --lhc 2015年4月8日15:22:38-->
+            <div class="CXZS2015_ZT_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic2.png">
+                <span class="j_tt">推荐研究机构</span>
+                <div id='yjjg_div' class="CXZS2015_Share" data-ImageType='canvas' data-ImageTitle='推荐研究机构' data-ImageID='jgxuehua' data-ImageDesID=''>
+ <!--                    <a herf="javascript:void(0)" class="a_share">
+                        <img alt="" src="../images/CXZS_share_3.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a> -->
+
+                </div>
+               
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+                <div id="jgxuehua" style="height:350px"></div>
+            </div>
+            <div class="CXZS2015_ZT_word">
+                <!--主题词：<span class="z_word">大数据</span>-->
+            </div>
+
+            
+            <div class="CXZS2015_ZT_title">
+                <img class="j_titlepic" alt="" src="../images/ZT_title_pic2.png">
+                <span class="j_tt">推荐研究专家</span>
+                <div id='yjzj_div' class="CXZS2015_Share" data-ImageType='canvas' data-ImageTitle='推荐研究专家' data-ImageID='fwrxuehua' data-ImageDesID=''>
+<!--                     <a herf="javascript:void(0)" class="a_share">
+                        <img alt="" src="../images/CXZS_share_3.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a> -->
+                    
+                </div>
+                
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+                <div id="fwrxuehua" style="height:350px"></div>
+            </div>
+            <div class="CXZS2015_ZT_word">
+                <!--主题词：<span class="z_word">大数据</span>-->
+            </div>
+            
+        </div>
+ <!-- 保存图片canvas  -->
+        <canvas id="myCanvas" style="display: none;"></canvas>
+    </body>
+    <script> 
+
+                
+        
+    	var backUrlToPage='ztfx_index.html';
+		var query = "*";
+		var pl = {};
+				//begin --lhc 2015年4月8日10:18:40
+		var hexinCount=0,totalCount=0,topestYear="",YearData=0;
+		var ThreeRanking=[],ThreeRankingZuiXin=[];
+		var arrYears=[2010,2011,2012,2013,2014];
+		var beforeThreeYear=[],afterTwoYear=[];
+		function historyBack(){
+		        window.location.href=backUrlToPage;
+		}
+		//end --lhc 2015年4月8日10:18:40
+        function resultcallback(res, xml, text, proxy){
+            
+
+            // var dataObj = eval("(" + res + ")");
+            // var wordArr = dataObj.hits.hits[0]._source.ckey.split("%");
+            // //var name = wordArr[wordArr.length - 1].substring(wordArr[wordArr.length - 1].indexOf("^a") + 2, wordArr[wordArr.length - 1].indexOf("^b"));
+            // //var num = wordArr[wordArr.length - 1].substring(wordArr[wordArr.length - 1].indexOf("^b") + 2);
+            // var html = "";
+            // var rowNo=1;
+            // for (var i = 1; i < 10; i++) {
+                // //var currentword=wordArr[wordArr.length - i].substring(wordArr[wordArr.length - i].indexOf("^a") + 2, wordArr[wordArr.length - i].indexOf("^b"));
+                // var currentword=wordArr[i];
+                // if(currentword!=query)
+                // {
+                    // if(i<5)
+                    // {
+                        // //begin --lhc 2015年4月8日10:18:40
+                        // ThreeRanking.push(currentword);
+                        // //end --lhc 2015年4月8日10:18:40
+                        // html += "<div class=\"z_TB2X\"><table><tr><td class=\"td1\">" + rowNo + "</td><td class=\"td2\"><a href=\"ztfx_info.html?name="+currentword+"\">" + currentword + "</a></td><td class=\"td3\">" + currentword + "</td></tr></table></div>";
+                    // }                    
+                    // else
+                        // html += "<div class=\"z_TB2\"><table><tr><td class=\"td1\">" + rowNo + "</td><td class=\"td2\"><a href=\"ztfx_info.html?name="+currentword+"\">" + currentword + "</a></td><td class=\"td3\">" + currentword+ "</td></tr></table></div>";
+                    // rowNo++;
+                // }
+            // };
+            var html = "";
+            var rowNo=1;
+                     var dataObj = eval("(" + res + ")");
+                     var arr_xg=[];
+            for(var item in dataObj.ckey){
+                var obj={name:item,
+                        value:dataObj.ckey[item]
+                };
+                arr_xg.push(obj);        
+            } 
+            arr_xg=arr_xg.OrderByDesc(function (a) {
+                return a.value;
+            });
+            for (var i = 1; i < 11; i++) {
+                
+                var currentword=arr_xg[i-1];
+                if(currentword.name!=query)       
+                {
+                    if(i<5)
+                    {
+                        ThreeRanking.push(currentword.name);
+                        //html += "<div class=\"z_TB2X\"><table><tr><td class=\"td1\">" + rowNo + "</td><td class=\"td2\"><a href=\"ztfx_info.html?name="+currentword.name+"\">" + currentword.name + "</a></td><td class=\"td3\">" + currentword.value + "</td></tr></table></div>";
+                        html += "<div class=\"z_TB2X\" onclick=\"window.location.href='ztfx_info.html?name="+currentword.name+"'\"><table><tr><td class=\"td1\">" + rowNo + "</td><td class=\"td2\">" + currentword.name + "</td><td class=\"td3\">" + currentword.value + "</td></tr></table></div>";
+                    }                    
+                    else
+                        //html += "<div class=\"z_TB2\"><table><tr><td class=\"td1\">" + rowNo + "</td><td class=\"td2\"><a href=\"ztfx_info.html?name="+currentword.name+"\">" + currentword.name + "</a></td><td class=\"td3\">" + currentword.value+ "</td></tr></table></div>";
+                        html += "<div class=\"z_TB2\" onclick=\"window.location.href='ztfx_info.html?name="+currentword.name+"'\"><table><tr><td class=\"td1\">" + rowNo + "</td><td class=\"td2\">" + currentword.name + "</td><td class=\"td3\">" + currentword.value+ "</td></tr></table></div>";
+                    rowNo++;
+                }
+            };
+            //$("#tb_xg").html(html);
+            $("#tb_zx").html(html);
+//begin --lhc 2015年4月8日10:18:40
+            var xszs_tip_msg='';
+            if(ThreeRanking.length>0){
+                xszs_tip_msg='在“'+query+'”学术领域，需学习了解';
+                for (var i=0; i < ThreeRanking.length; i++) {
+                    xszs_tip_msg+='“'+ThreeRanking[i]+'”，';
+                };
+                xszs_tip_msg=xszs_tip_msg.substring(0,xszs_tip_msg.length-1)+'等研究主题';
+                //$("#xszs_ZT_word").html("主题词：<span class='z_word'>"+query+"</span><br/>"+xszs_tip_msg);
+                //$("#xszs_ZT_word").html(xszs_tip_msg);
+                $("#xgzt_ZT_word").html(xszs_tip_msg);
+            }else{
+                //$("#xszs_ZT_word").html("主题词：<span class='z_word'>"+query+"</span>"); 
+                //$("#xszs_ZT_word").html(); 
+                $("#xgzt_ZT_word").html(); 
+            }
+
+            //end --lhc 2015年4月8日10:18:40
+        }
+		
+		function resultcallback1(res, xml, text, proxy){
+            var dataObj = eval("(" + res + ")");
+            var html = "<table class=\"table table-condensed table-bordered\"  style=\"width:95%;margin:0 auto;\"><thead><tr style=\"background-color:#ffffcc;\"><th style=\"text-align:center;\">序号</th><th style=\"text-align:center;\">文献类型</th><th style=\"text-align:center;\">数量</th></tr></thead><tbody id=\"tbody\">";
+            
+            for (var i = 0; i < dataObj.length; i++) {
+				if (dataObj[i].value == 0)
+					continue;
+				switch(dataObj[i].key){
+					case "wf_mds_chn_qikan":
+						html += "<tr><td>" + (i+1) + "</td><td>期刊</td><td>" + dataObj[i].value + "</td></tr>";
+						break;
+					case "wf_mds_chn_huiyi":
+						html += "<tr><td>" + (i+1) + "</td><td>会议</td><td>" + dataObj[i].value + "</td></tr>";
+						break;
+					case "wf_mds_chn_xuewei":
+						html += "<tr><td>" + (i+1) + "</td><td>学位</td><td>" + dataObj[i].value + "</td></tr>";
+						break;	
+					case "wf_mds_chn_cstad":
+						html += "<tr><td>" + (i+1) + "</td><td>成果</td><td>" + dataObj[i].value + "</td></tr>";
+						break;	
+					case "wf_mds_chn_biaozhun":
+						html += "<tr><td>" + (i+1) + "</td><td>标准</td><td>" + dataObj[i].value + "</td></tr>";
+						break;	
+					case "wf_mds_chn_zhuanli":
+						html += "<tr><td>" + (i+1) + "</td><td>专利</td><td>" + dataObj[i].value + "</td></tr>";
+						break;																												
+					default:			
+				}
+            }
+            html += "</tbody></table>";
+            $("#table2").html(html);			
+		}
+		function  resultNameBack(res, xml, text, proxy){
+		  var dataObj = eval("(" + res + ")");
+		  var datas=dataObj.hits.hits;
+		  var nameObj={};
+		  for(var i=0; i < datas.length; i++){
+		      var id=datas[i]['_source']['orgid'];
+		      var name=datas[i]['_source']['name'];
+		      nameObj[id]=name;
+		  };
+		  var backUrl="ztfx_info.html%3Fname%3D"+query;
+		  
+		  var optionjg = getjigoudata(query,resultcallback2Obj,nameObj,backUrl); 
+		  //$('#yjjg_div').dataset.imagetitle=query+"相关推荐研究机构";
+		  document.getElementById('yjjg_div').setAttribute('data-ImageTitle',query+"相关推荐研究机构");
+          loadSnowChart('jgxuehua',optionjg);
+		}
+		var resultcallback2Obj;
+		function resultcallback2(res, xml, text, proxy){
+            var dataObj = eval("(" + res + ")");
+            var props = "";
+            //var obj = dataObj.facets.forgc;
+            var obj = dataObj.facets.orgid;
+            resultcallback2Obj=obj;
+            //begin --lhc 2015年4月27日14:00:36
+            var queryName="";
+            for(var p in obj){
+                queryName+=" ORGID:"+p+" OR ";
+            }
+            if(""!=queryName){
+                queryName=queryName.substring(0,queryName.length-3);
+                pl = {
+                    userName:"!@#$4321!@#$",
+                    password:"!@#$4321!@#$",
+                    indexName:"wf_mds_chn_org",
+                    queryString:queryName,
+                    sortField:"",
+                    fields:"",
+                    pageNumber:"0",
+                    pagePerNo:"11",
+                    facets:"",
+                    fm:"@JSON"
+                }
+                if (proxy instanceof SOAPProxy) {
+                   proxy.EsSearch(pl, true, resultNameBack, failurecallback);
+                } else {
+                    alert("服务器连接失败，请稍后再试！");
+                }
+            }
+            //end --lhc 2015年4月27日14:00:36
+            //get snow chart person data  
+            //zwj  20150331 
+            //var optionjg = getjigoudata(query,obj); 
+            //lbt 20150403
+            //loadSnowChart('jgxuehua',optionjg);
+            /*
+            var html = "<table class=\"table table-condensed table-bordered\"  style=\"width:95%;margin:0 auto;\"><thead><tr style=\"background-color:#ffffcc;\"><th style=\"text-align:center;\">序号</th><th style=\"text-align:center;\">机构名称</th><th style=\"text-align:center;\">数量</th></tr></thead><tbody id=\"tbody\">";
+            var i = 1;
+            for (var p in obj) {
+                if (typeof(obj[p]) == "function") {
+                    obj[p]();
+                }
+                else {
+                    html += "<tr><td>" + i + "</td><td>" + p + "</td><td>" + obj[p] + "</td></tr>";
+                }
+                i++;
+            }
+            html += "</tbody></table>";
+            $("#table3").html(html);	
+            */		
+		}
+		var resultcallback3Obj;
+		function  resultAuthNameBack(res, xml, text, proxy){
+          var dataObj = eval("(" + res + ")");
+          var datas=dataObj.hits.hits;
+          var nameObj={};
+          for(var i=0; i < datas.length; i++){
+              var id=datas[i]['_id'];
+              var name=datas[i]['_source']['name'];
+              if(undefined !=name && ""!=name){
+                  nameObj[id]=name.split('%')[0];
+              }else{
+                  nameObj[id]="";
+              }
+              
+          };
+          var backUrl="ztfx_info.html%3Fname%3D"+query;
+          
+          var optionfwr = getfawenrdata(query,resultcallback3Obj,nameObj,backUrl); 
+          //$('#yjzj_div').dataset.imagetitle=query+" 相关推荐研究专家"; 
+          document.getElementById('yjzj_div').setAttribute('data-ImageTitle',query+"相关推荐研究专家"); 
+          loadSnowChart('fwrxuehua',optionfwr);
+        }
+		function resultcallback3(res, xml, text, proxy){
+            var dataObj = eval("(" + res + ")");
+            var props = "";
+            var obj = dataObj.facets.auid;
+            resultcallback3Obj=obj;
+            var queryName="";
+            for(var p in obj){
+                queryName+=" _id:"+p.toUpperCase()+" OR ";
+            }
+            if(""!=queryName){
+                queryName=queryName.substring(0,queryName.length-3);
+                pl = {
+                    userName:"!@#$4321!@#$",
+                    password:"!@#$4321!@#$",
+                    indexName:"wf_mds_auth_new",
+                    queryString:queryName,
+                    sortField:"",
+                    fields:"",
+                    pageNumber:"0",
+                    pagePerNo:"11",
+                    facets:"",
+                    fm:"@JSON"
+                }
+                if (proxy instanceof SOAPProxy) {
+                   proxy.EsSearch(pl, true, resultAuthNameBack, failurecallback);
+                } else {
+                    alert("服务器连接失败，请稍后再试！");
+                }
+            }
+		}
+		
+		function resultcallback4(res, xml, text, proxy){
+            var dataObj = eval("(" + res + ")");
+            var props = "";
+            var obj = dataObj.fjoucn;
+            var html = "<table class=\"table table-condensed table-bordered\"  style=\"width:95%;margin:0 auto;\"><thead><tr style=\"background-color:#ffffcc;\"><th style=\"text-align:center;\">序号</th><th style=\"text-align:center;\">期刊名</th><th style=\"text-align:center;\">数量</th></tr></thead><tbody id=\"tbody\">";
+            var i = 1;
+            for (var p in obj) {
+                // 方法  
+                if (typeof(obj[p]) == "function") {
+                    obj[p]();
+                }
+                else {
+                    html += "<tr><td>" + i + "</td><td>" + p + "</td><td>" + obj[p] + "</td></tr>";
+                }
+                i++;
+            }
+            html += "</tbody></table>";
+            $("#table5").html(html);			
+		}
+		function resultcallback5(res, xml, text, proxy){
+            fenbutuInfo(res);           
+        }
+ //begin --lhc 2015年4月8日13:24:06
+        function  resultcallback6(res, xml, text, proxy) {  
+            var dataObj = eval("(" + res + ")");
+            for (var item in dataObj.year) {
+                var isIn=false;
+                for(var year in arrYears){
+                    if(arrYears[year]==item){
+                        isIn=true;
+                        break;                    
+                        }
+                }
+                if(isIn){
+                    hexinCount+=dataObj.year[item];
+                }
+            };
+            pl={
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "SCORE:0 AND KEYWORD:" + query,
+                    "size": "10",
+                    "facetsFields": "YEAR",
+                    "fm": "@JSON"
+                };
+            proxy.FacetsSearch(pl, true, resultcallback7, failurecallback);
+        }
+        function  resultcallback7(res, xml, text, proxy) {
+            var dataObj = eval("(" + res + ")");
+            for (var item in dataObj.year) {
+                var isIn=false;
+                for(var year in arrYears){
+                    if(arrYears[year]==item){
+                        isIn=true;
+                        break;                    
+                        }
+                }
+                if(isIn){
+                    totalCount+=dataObj.year[item];
+                }
+            };
+            if(totalCount!=0 && topestYear!=""){
+                var xishu=hexinCount/totalCount;
+                xishu=xishu.toFixed(2);
+                var xishu_msg="近十年，主题词“"+query+"”在 "+topestYear+" 年学术研究产出达到顶峰，其核心刊物收录系数为 "+xishu+"，文章质量";
+                var float_xishu=parseFloat(xishu);
+                if(float_xishu>=0.5){
+                    xishu_msg+="非常高";
+                }else if(float_xishu<0.5 && float_xishu>=0.3){
+                    xishu_msg+="较高";
+                }else if(float_xishu<0.3 && float_xishu>=0.1){
+                    xishu_msg+="较低";
+                }else{
+                    xishu_msg+="非常低";
+                }
+                $("#xszs_ZT_xishu").html(xishu_msg);
+                //$('#xszs_ZT_xishu_CutScreen').html(xishu_msg);
+                //$('#xsrd_div').dataset.imagetitle=xishu_msg;
+                document.getElementById('xsrd_div').setAttribute('data-ImageTitle',xishu_msg);
+            }
+            //$closeToast();
+        }
+        Array.prototype.OrderByDesc = function (func) {
+            var m = {};
+            for (var i = 0; i < this.length; i++) {
+                for (var k = 0; k < this.length; k++) {
+                    if (func(this[i]) > func(this[k])) {
+                        m = this[k];
+                        this[k] = this[i];
+                        this[i] = m;
+                    }
+                }
+            }
+            return this;
+        }
+        Array.prototype.uniqueArr = function () {
+            var temp = new Array();
+              for(i = 0; i < this.length; i++) {
+                  if(i!=this.length-1){
+                      if(this[i].name == this[i+1].name) {
+                        if(this[i].value<this[i+1].value){
+                            continue;
+                        }else{
+                            temp[temp.length]=this[i];
+                            i++;
+                        }
+                      }else{
+                          temp[temp.length]=this[i];
+                      }
+                  }else{
+                      if(this[i].name == this[i-1].name) {
+                        if(this[i].value<this[i-1].value){
+                            continue;
+                        }else{
+                            temp[temp.length]=this[i];
+                            i++;
+                        }
+                      }else{
+                          temp[temp.length]=this[i];
+                      }
+                  }
+              }
+              return temp;
+          
+        }
+        function resultcallback2010(res, xml, text, proxy){
+
+            var dataObj = eval("(" + res + ")");
+            for(var item in dataObj.ckey){
+                var obj={name:item,
+                        value:dataObj.ckey[item]
+                };
+                beforeThreeYear.push(obj);
+            }
+                pl={
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "YEAR:2011 AND CKEY:"+query,
+                    "size": "21",
+                    "facetsFields": "CKEY",
+                    "fm": "@JSON"
+                };
+                proxy.FacetsSearch(pl, true, resultcallback2011, failurecallback);
+        }
+        function resultcallback2011(res, xml, text, proxy){
+
+            var dataObj = eval("(" + res + ")");
+            for(var item in dataObj.ckey){
+                var obj={name:item,
+                        value:dataObj.ckey[item]
+                };
+                beforeThreeYear.push(obj);
+            }
+                pl={
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "YEAR:2012 AND CKEY:"+query,
+                    "size": "21",
+                    "facetsFields": "CKEY",
+                    "fm": "@JSON"
+                };
+                proxy.FacetsSearch(pl, true, resultcallback2012, failurecallback);
+        }
+        function resultcallback2012(res, xml, text, proxy){
+
+            var dataObj = eval("(" + res + ")");
+            for(var item in dataObj.ckey){
+                var obj={name:item,
+                        value:dataObj.ckey[item]
+                };
+                beforeThreeYear.push(obj);
+            }
+                pl={
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "YEAR:2013 AND CKEY:"+query,
+                    "size": "21",
+                    "facetsFields": "CKEY",
+                    "fm": "@JSON"
+                };
+                proxy.FacetsSearch(pl, true, resultcallback2013, failurecallback);
+        }
+        function resultcallback2013(res, xml, text, proxy){
+
+            var dataObj = eval("(" + res + ")");
+            for(var item in dataObj.ckey){
+                var obj={name:item,
+                        value:dataObj.ckey[item]
+                };
+                afterTwoYear.push(obj);
+            }
+                pl={
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "YEAR:2014 AND CKEY:"+query,
+                    "size": "21",
+                    "facetsFields": "CKEY",
+                    "fm": "@JSON"
+                };
+                proxy.FacetsSearch(pl, true, resultcallback2014, failurecallback);
+        }
+        function resultcallback2014(res, xml, text, proxy){
+            ////$closeToast();
+            var arr_show=[];
+            var dataObj = eval("(" + res + ")");
+            for(var item in dataObj.ckey){
+                var obj={name:item,
+                        value:dataObj.ckey[item]
+                };
+                afterTwoYear.push(obj);
+            }
+            for(var after in afterTwoYear){
+                var isIN=false;
+                for(var before in beforeThreeYear){
+                    if(afterTwoYear[after].name==beforeThreeYear[before].name){
+                        isIN=true;
+                        break;
+                    }
+                }
+                if(!isIN){
+                    arr_show.push(afterTwoYear[after]);
+                }
+            }
+            var orderArrByName=arr_show.OrderByDesc(function (a) {
+                return a.name;
+            });
+            orderArrByName=orderArrByName.uniqueArr();
+            var orderArr = orderArrByName.OrderByDesc(function (a) {
+                return a.value;
+            });
+            var html = "";
+            var j=0,totolRow=1;
+            for (var i=0;i<orderArr.length;i++) {
+                var currentword=orderArr[i].name;
+                var curValue=orderArr[i].value;
+                var re = /^[0-9]+.?[0-9]*$/;
+                if(currentword!=query && totolRow<11 && !re.test(currentword)){
+                    if(j<3)
+                    {
+                        ThreeRankingZuiXin.push(currentword);
+                        //html += "<div class=\"z_TB2X\" onclick=\"jump(this)\"><table><tr><td class=\"td1\">" + totolRow + "</td><td class=\"td2\"><a href=\"ztfx_info.html?name="+currentword+"\">" + currentword+"</a></td><td class=\"td3\">" + curValue + "</td></tr></table></div>";
+                        html += "<div class=\"z_TB2X\" onclick=\"window.location.href='ztfx_info.html?name="+currentword+"'\"><table><tr><td class=\"td1\">" + totolRow + "</td><td class=\"td2\">" + currentword+"</td><td class=\"td3\">" + curValue + "</td></tr></table></div>";
+                        j++;
+                    }
+                    else
+                        //html += "<div class=\"z_TB2\" onclick=\"jump(this)\"><table><tr><td class=\"td1\">" + totolRow + "</td><td class=\"td2\"><a href=\"ztfx_info.html?name="+currentword+"\">" + currentword+ "</a></td><td class=\"td3\">" + curValue+ "</td></tr></table></div>";
+                        html += "<div class=\"z_TB2\" onclick=\"window.location.href='ztfx_info.html?name="+currentword+"'\"><table><tr><td class=\"td1\">" + totolRow + "</td><td class=\"td2\">" + currentword+ "</td><td class=\"td3\">" + curValue+ "</td></tr></table></div>";
+                    totolRow++;
+                }
+            };
+            var xgzt_tip_msg='';
+            if(ThreeRankingZuiXin.length>0){
+                xgzt_tip_msg='在“'+query+'”学术领域，应重点关注近两年发展迅速的';
+                for (var i=0; i < ThreeRankingZuiXin.length; i++) {
+                    xgzt_tip_msg+='“'+ThreeRankingZuiXin[i]+'”，';
+                };
+                xgzt_tip_msg=xgzt_tip_msg.substring(0,xgzt_tip_msg.length-1)+'等研究方向';
+                //$("#xgzt_ZT_word").html("主题词：<span class='z_word'>"+query+"</span><br/>"+xgzt_tip_msg);
+                //$("#xgzt_ZT_word").html(xgzt_tip_msg);
+                
+                $("#xszs_ZT_word").html(xgzt_tip_msg);
+            }else{
+                //$("#xgzt_ZT_word").html("主题词：<span class='z_word'>"+query+"</span>");    
+                //$("#xgzt_ZT_word").html();
+                $("#xszs_ZT_word").html();  
+            }
+            //$("#tb_zx").html(html);
+            $("#tb_xg").html(html);
+        }
+        //end --lhc 2015年4月8日13:24:06
+        function fenbutuInfo(res){
+            var dataObj = eval("(" + res + ")");
+            var yeardata = [];
+            var yearcategories = [];
+            var i = 0;
+            for (var m in dataObj.year) {
+                yeardata[i] = dataObj.year[m];
+                yearcategories[i] = m;
+                i++; 
+                //begin --lhc 2015年4月8日14:43:13
+                var tempData=0;
+                if(topestYear==""){
+                    YearData=dataObj.year[m];
+                    topestYear=m;
+                }else{
+                    if(dataObj.year[m]>YearData){
+                        YearData=dataObj.year[m];
+                        topestYear=m+",";
+                    }else if(dataObj.year[m]==YearData){
+                        topestYear+=m+",";
+                    }
+                }
+
+                //end --lhc 2015年4月8日14:43:13
+            }
+                        //begin --lhc 2015年4月8日14:43:13
+            if(topestYear.length>0){
+                topestYear=topestYear.substring(0,topestYear.length-1);
+            }
+            //end --lhc 2015年4月8日14:43:13 
+                             
+            $('#line').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: '学术热度走势'
+                },
+                subtitle: {
+                    text: query,//+'核心发文量:' + total
+                },
+                xAxis: {
+                    categories:yearcategories,
+                    labels: {
+                        enabled: true
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title:{  text:""}
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: true
+                },
+                plotOptions: {
+                    spline: {
+                        lineWidth: 4,
+                        states: {
+                            hover: {
+                                lineWidth: 5
+                            }
+                        },
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                series: [{
+                    name: '刊篇数',
+                    data: yeardata                      
+                }],
+                navigation: {
+                    menuItemStyle: {
+                        fontSize: '10px'
+                    }
+                }
+            }); 
+            $('#line_1').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: '学术热度走势'
+                },
+                subtitle: {
+                    text: query,//+'核心发文量:' + total
+                },
+                xAxis: {
+                    categories:yearcategories,
+                    labels: {
+                        enabled: true
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title:{  text:""}
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: true
+                },
+                plotOptions: {
+                    spline: {
+                        lineWidth: 4,
+                        states: {
+                            hover: {
+                                lineWidth: 5
+                            }
+                        },
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                series: [{
+                    name: '刊篇数',
+                    data: yeardata                      
+                }],
+                navigation: {
+                    menuItemStyle: {
+                        fontSize: '10px'
+                    }
+                }
+            });        
+        }
+        
+        function failurecallback(res, xml, text, proxy){
+			//$closeToast();
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function XN_CheckAllCnText(str){
+            var reg = /[\u4E00-\u9FA5]/g;
+            if (reg.test(str)) {
+                return "CN";
+            }
+            else {
+                return "EN";
+            }
+        }
+        
+        function gotproxycallback(proxy, wsdl, text){
+
+			$(".CXZS2015_ZT_word").html("主题词：<span class='z_word'>"+query+"</span>");
+			
+           // pl = {
+            //    "userName": "!@#$4321!@#$",
+            //    "password": "!@#$4321!@#$",
+            //    "indexName": "wf_mds_chn_qikan",
+                // "queryString": XN_CheckAllCnText(query) + ":\"" + query + "\"",
+            //    "queryString": "KEYWORD:\"" + query + "\"",
+             //   "sortField": "",
+             //   "fields": "",
+            //    "pageNumber": "0",
+            //    "pagePerNo": "10",
+            //    "facets": "CKEY",
+            //    "fm": "@JSON"
+           // };
+              pl={
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "KEYWORD:\"" + query + "\"",
+                    "size": "11",
+                    "facetsFields": "CKEY",
+                    "fm": "@JSON"
+                };
+            if (proxy instanceof SOAPProxy) {
+				//主题共现词统计
+                //proxy.EsSearch(pl, true, resultcallback, failurecallback);
+				proxy.FacetsSearch(pl, true, resultcallback, failurecallback);				
+				//文献总体产出统计
+                pl = {
+                    userName: "!@#$4321!@#$",
+                    password: "!@#$4321!@#$",
+                    indexName: "wf_mds_chn_qikan,wf_mds_chn_xuewei,wf_mds_chn_zhuanli,wf_mds_chn_cstad,wf_mds_chn_huiyi,wf_mds_chn_biaozhun",
+                    queryString: "KEYWORD:" + query,
+                    fm: "@JSON"
+                };
+				proxy.Count(pl, true, resultcallback1, failurecallback);
+				
+				//发文较多机构
+				pl = {
+                    userName: "!@#$4321!@#$",
+                    password: "!@#$4321!@#$",
+                    indexName: "wf_mds_chn_qikan",
+                    queryString: "KEYWORD:" + query,
+                    sortField: "",
+                    fields: "",
+                    pageNumber: "0",
+                    pagePerNo: "10",
+                    //facets: "FORGC",
+                    facets: "ORGID",
+                    fm: "@JSON"
+                };
+				proxy.EsSearch(pl, true, resultcallback2, failurecallback);
+				
+				//发文较多人物
+                pl = {
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "KEYWORD:" + query,
+                    "sortField": "",
+                    "fields": "",
+                    "pageNumber": "0",
+                    "pagePerNo": "10",
+                    "facets": "AUID",
+                    "fm": "@JSON"
+                };
+				proxy.EsSearch(pl, true, resultcallback3, failurecallback);			
+				
+				//发文较多期刊
+                pl = {
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "KEYWORD:" + query,
+                    "size": "10",
+                    "facetsFields": "FJOUCN",
+                    "fm": "@JSON"
+                };	
+				proxy.FacetsSearch(pl, true, resultcallback4, failurecallback);
+				
+				//发文较多期刊
+                pl = {
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "KEYWORD:" + query,
+                    "size": "10",
+                    "facetsFields": "YEAR",
+                    "fm": "@JSON"
+                };  
+                proxy.FacetsSearch(pl, true, resultcallback5, failurecallback);	
+                //begin --lhc 2015年4月8日13:24:06
+                pl={
+                    "userName": "!@#$4321!@#$",
+                    "password": "!@#$4321!@#$",
+                    "indexName": "wf_mds_chn_qikan",
+                    "queryString": "NOT SCORE:0 AND KEYWORD:" + query,
+                    "size": "10",
+                    "facetsFields": "YEAR",
+                    "fm": "@JSON"
+                };
+                proxy.FacetsSearch(pl, true, resultcallback6, failurecallback);
+
+              //pl={
+              //    "userName": "!@#$4321!@#$",
+              //    "password": "!@#$4321!@#$",
+              //    "indexName": "wf_mds_chn_qikan",
+              //    "queryString": "YEAR:2010 AND CKEY:"+query,
+              //    "size": "21",
+              //    "facetsFields": "CKEY",
+              //    "fm": "@JSON"
+              //};
+              //proxy.FacetsSearch(pl, true, resultcallback2010, failurecallback);
+                //end --lhc 2015年4月8日13:24:06            
+}
+            else {
+				//$closeToast();
+                alert("服务器连接失败，请稍后再试！");
+            }
+        }
+        zy_init();
+        window.onload = function(type){
+
+                //uexSina.cbShare=function(opCode,dataType,data){
+                 //  if(parseInt(data)==0){
+                  //     $alert('分享成功');
+                  // }else{
+                 //      $alert('分享失败，内容非法或重复。');
+//}
+               // };
+                // uexWeiXin.cbIsWXAppInstalled = function(opId,dataType, data){
+                    // alert(data);
+                    // if(data=='0'){
+                        // //alert('已安装');  
+                    // }else{
+                        // alert('未安装微信');
+                        // return;  
+                    // }
+                // };
+                // uexSina.registerCallBack = function(opCode,dataType,data){
+                   // if(data!=0){
+                        // $alert('注册失败');
+                       // return;
+                   // }
+                   // //document.getElementById("selectItem").innerHTML = "返回注册状态码:"+data;
+                // }
+				var params = zy_parse();
+				if (params["name"])
+				{
+					query = params["name"];
+				}
+				if(undefined !=params["backUrl"] && ""!=params["backUrl"]){
+				    backUrlToPage=params["backUrl"];
+				}
+				try {
+					//$toast("正在加载...");
+		            SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+		        } catch (x) {
+					//$closeToast();
+		            alert("服务器连接失败，请稍后再试！");
+		        }
+            
+        }
+        
+        function backHome(){
+            window.location.href="../index.html";
+        }   
+        
+        
+        
+        
+//分享按钮下拉效果---------------------------------------------------------
+        $(function(){
+            $('.a_share').click(function(){
+                $(this).next('.CXZS2015_Share_box').slideToggle('fast');
+            });
+        });        
+//分享---------------------------------------------------------------        
+        function shareWeixinText(){
+            var appKey = "wx072907fe8fe9143d";
+            var appSecret = "66da53db779e22ae3171a95836ea9340";
+            var registerUrl = "http://www.sciinfo.cn/";
+            uexWeiXin.registerApp(appKey);
+            //分享文字
+            //this.registerApp();
+            var txt = "这是来自AppCan中国最大的移动中间键平台对微信支持测试";
+            //分享场景 0：对话 1：朋友圈
+            var sence = 1;
+            uexWeiXin.sendTextContent(sence,txt);
+          }
+          
+        function shareTentText(){
+            registerTent();
+                isText=0;
+                //分享文本，支持分享文本到腾讯微博
+                var txt = "这是AppCan平台对腾讯微博分享支持测试";
+                uexTent.sendTextContent(txt);
+            }
+            function registerTent(){
+                var appKey = "801338244";
+                var appSecret = "2428aa8e7478f6ea2c6171b48f5adcf7";
+                var registerUrl = "http://www.3g2win.com/";
+                //注册腾讯微博开放平台申请的appkey,appsecret,registerUrl
+                uexTent.registerApp(appKey, appSecret, registerUrl);
+            } 
+
+    </script>
+    <script type="text/javascript">
+        //zwj 20150331
+        function loadSnowChart(snowchart,option){
+            // 路径配置
+            require.config({
+                paths: {    echarts: '../chart/build/dist'}
+            });
+            
+            // 使用
+            require(['echarts', 'echarts/chart/force' // 使用柱状图就加载bar模块，按需加载
+                ], function(ec){
+                    // 基于准备好的dom，初始化echarts图表
+                    var chartcontrol = ec.init(document.getElementById(snowchart));
+                    
+                    // 为echarts对象加载数据 
+                    chartcontrol.setOption(option);
+
+                });
+        }
+            function isnull(){
+            if($("#serValue").val()!=''){
+                return true;
+            }else if($("#serValue").val()==''){
+                $alert("检索词不能为空!");
+                return false;
+            }
+        }
+        </script>
+</html>

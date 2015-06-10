@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>info</title>
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yse"> 
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../css/mui.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">
+        
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main.js"></script>
+        <style>
+            .selectSearch{
+                background-color:#0066FF;
+                padding:5px;color:#fff;
+            }
+        </style>
+        
+    </head>
+    <body>
+
+		<div class="CXZS2015_header1">
+			<span class="h_title">全球智库</span>
+			<!--begin --lhc 2015年4月14日11:28:22-->
+			<div class="h_back" onclick="historyBack();" id="confirm">
+				<img src="../images/CXZS_header1_go.gif">
+				<div class="CXZS2015_clear"></div>
+			</div>
+			<!--end --lhc 2015年4月14日11:28:22-->
+			<div class="CXZS2015_Share" style="display:none;">
+                <a herf="javascript:void(0)" class="a_share">
+                    <img alt="" src="../images/CXZS_share_1.png">分享
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <div class="CXZS2015_Share_box" style="display:none;">
+                    <a class="s_one" onclick="shareWeixinText();">微信<img alt="" src="../images/CXZS_Share_ico2.png"></a>
+                    <a class="s_one" onclick="shareSinaText();">微博<img alt="" src="../images/CXZS_Share_ico1.png"></a>
+                    <a class="s_one" onclick="shareTentText();">Q Q<img alt="" src="../images/CXZS_Share_ico3.png"></a>
+                </div>
+            </div>
+		</div>
+		
+		<div class="CXZS2015_bd3" id="main">
+		</div>
+		
+		
+    </body>
+    
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script type="text/javascript" charset="utf-8">
+            mui.init();
+            //处理点击事件，需要打开原生浏览器
+            mui('body').on('tap', 'a', function(e) {
+                var href = this.getAttribute('href');
+                if (href) {
+                    if (window.plus) {
+                        plus.runtime.openURL(href);
+                    } else {
+                        location.href = href;
+                    }
+                }
+            });
+            
+            
+        //发送请求按钮的点击事件
+        // document.getElementById("back").addEventListener('tap', function() {
+            // ajax();
+        // });
+    </script>
+    
+    <script>
+        // begin --lhc 2015年4月14日10:09:46
+        var page=0;
+        var q='';
+        var markPoint='';
+        function historyBack(){
+            window.location.href='qqzklist.html?page='+page+'&q='+q+'&markPoint='+markPoint;
+        }
+        // end --lhc 2015年4月14日10:09:46
+        function resultcallback(res) {
+            //$closeToast();
+            var dataObj=res;
+            var title=dataObj[0].title==null?"":dataObj[0].title;
+            var author=dataObj[0].author==null?"":dataObj[0].author;
+            var date="";
+            if(dataObj[0].modifytime!=null && ""!=dataObj[0].modifytime){
+                var changeDate=new Date(dataObj[0].modifytime);
+                date=changeDate.getFullYear()+"-"+(parseInt(changeDate.getMonth())+1)+"-"+changeDate.getDate();
+            }
+            var description=dataObj[0].context==null?"":dataObj[0].context;
+            description=description.replace(/&quot;/g,'"');
+            description=description.replace(/&amp;/g,'&');
+            description=description.replace(/&lt;/g,'<');
+            description=description.replace(/&gt;/g,'>');
+            description=description.replace(/&ensp;/g,' ');
+            description=description.replace(/&emsp;/g,' ');
+            description=description.replace(/&nbsp;/g,' ');
+            $("#main").append('<div class="CXZS2015_Txt"><div class="t_title">'+title+'</div><div class="t_time">'+author+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div><div class="t_txt">'+description+'</div></div>');
+        }
+        
+        function failurecallback(res, xml, text, proxy) {
+            //$closeToast();
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function gotproxycallback() {
+            var Request=zy_parse();
+            id=Request["id"];
+            // begin --lhc 2015年4月14日10:09:46
+            markPoint=id;
+            page=Request["page"];
+            q=Request["q"];
+
+            // end --lhc 2015年4月14日10:09:46
+            markPoint=id;
+
+            $.ajax({
+                url: "http://omp.sciinfo.cn/index/third/user/newToJackson",//接口地址
+                type: "get",
+                dataType: "jsonp",
+                timeout: 20000,
+                cache: false,
+                async: false,
+                jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数
+                jsonpCallback: "success_jsonpCallback", //callback的function名称
+                data: {  rtype : "NEW " ,_id : id ,callback:"success_jsonpCallback"},
+                error: function () {
+                    //调用失败   
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！"); 
+                },
+                success: function (json) {
+                    //返回结果    
+                    
+                }
+            });
+
+        }
+		function success_jsonpCallback(json){
+			resultcallback(json);
+		}
+
+        window.onload = function(type){
+
+                try {
+                    //$toast("正在加载...");
+                    gotproxycallback();
+                } catch (x) {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }
+            
+        }
+    
+
+    </script>
+</html>

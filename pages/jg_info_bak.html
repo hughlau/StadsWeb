@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>机构信息</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+           
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <script src="../js/highcharts.js"></script>
+        
+        
+		
+    </head>
+    <body>
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="history.go(-1);" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">返回
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1" style=" display: none;">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+        </div>
+    	<!-- <div class="navbar navbar-fixed-top" role="navigation"  style="background-color:#555;height:50px;border-bottom:1px #797979 solid;">
+    		<div class="container">
+    			<div class="row" style="margin-top:10px;margin-left:10px;margin-right:10px;border-bottom:1px #fff solid;">
+    				<div class="col-xs-8" style="font-size:20px;color:#fff;" id="name">
+    					
+					</div>
+					<div class="col-xs-4" style="height:28px;font-size:12px;color:#fff;text-align:right; vertical-align:text-bottom;">
+						万方软件
+					</div>
+				</div>
+    		</div>
+    	</div> -->
+                    	
+    	<div class="CXZS2015_bd3" id="main">
+            <div class="CXZS2015_JG_MingPian">
+                <div class="z_MingPian">
+                    <div class="z_mp1"><span id="orgname"></span></div>
+                    <div class="z_mp2">
+                        <table id="featurecollege">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="CXZS2015_JG_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic5.png">
+                <span class="j_tt">期刊论文产出</span>
+                <div class="CXZS2015_Share" style="display:none;">
+                    <a herf="javascript:void(0)" class="a_share">
+                        <img alt="" src="../images/CXZS_share_2.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a>
+                    <div class="CXZS2015_Share_box">
+                        <a class="s_one" onclick="shareWeixinText();">微信<img alt="" src="../images/CXZS_Share_ico2.png"></a>
+                        <a class="s_one" onclick="shareSinaText();">微博<img alt="" src="../images/CXZS_Share_ico1.png"></a>
+                        <a class="s_one" onclick="shareTentText();">Q Q<img alt="" src="../images/CXZS_Share_ico3.png"></a>
+                    </div>
+                </div>
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="biao1" style="margin: 0 auto;height:200px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="CXZS2015_JG_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic5.png">
+                <span class="j_tt">外文期刊论文产出</span>
+                <div class="CXZS2015_Share" style="display:none;">
+                    <a herf="javascript:void(0)" class="a_share">
+                        <img alt="" src="../images/CXZS_share_2.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a>
+                    <div class="CXZS2015_Share_box">
+                        <a class="s_one" onclick="shareWeixinText();">微信<img alt="" src="../images/CXZS_Share_ico2.png"></a>
+                        <a class="s_one" onclick="shareSinaText();">微博<img alt="" src="../images/CXZS_Share_ico1.png"></a>
+                        <a class="s_one" onclick="shareTentText();">Q Q<img alt="" src="../images/CXZS_Share_ico3.png"></a>
+                    </div>
+                </div>
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="biao4" style="margin: 0 auto;height:200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+		<!--div class="container" id="main" style="padding-top:50px;padding-bottom:100px;">			
+			<div class="row">
+				<div class="col-xs-12" style="margin-top:10px;">
+					<img src="../css/images/jigou1.png" width="50">期刊论文产出
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div id="biao1" style="margin: 0 auto;height:200px;"></div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col-xs-12">
+					<div id="biao2" style="margin: 0 auto;height:200px;"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12" style="margin-top:10px;">
+					<img src="../css/images/yzbg.png" width="50">外文期刊论文产出情况
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div id="biao3" style="margin: 0 auto;height:200px;"></div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col-xs-12">
+					<div id="biao4" style="margin: 0 auto;height:200px;"></div>
+				</div>
+			</div>
+		</div>
+    	
+    	<!--底部按钮栏设置,图标在css样式文件夹中修改-->
+
+    </body>
+	<script>
+		var id,name;	
+        var pl = {};
+		
+		function resultcallback(res, xml, text, proxy) {
+			//$closeToast();
+			var dataObj=eval("("+res+")");
+	   		var cateLabels = [];
+			var cateData = [];
+
+			//$("#name").html(dataObj.hits.hits[0]['_source']['name']);
+			var orgname=dataObj.hits.hits[0]['_source']['name'];
+			$("#orgname").html(orgname);
+			var featurecollege=dataObj.hits.hits[0]['_source']['featurecollege'];
+			////判断高校类别
+            var featurecollegehtml="<tr>";
+            if(featurecollege.indexOf("“985”工程高校")>=0)
+            {
+                featurecollegehtml+="<td>985高校</td>";
+            }
+            if(featurecollege.indexOf("“211”工程高校")>=0)
+            {
+                featurecollegehtml+="<td>211高校</td>";
+            }
+            if(featurecollege.indexOf("“985”工程高校")<0&&featurecollege.indexOf("“211”工程高校")<0)
+            {
+                featurecollegehtml+="<td>普通高校</td>";
+            }
+            featurecollegehtml+="</tr>";
+            $("#featurecollege").html(featurecollegehtml);
+            ///
+			pl.indexName = "wf_mds_chn_qikan";
+			pl.queryString = "ORG:"+orgname+" AND NOT SCORE:0";
+			pl.facets = "YEAR";						
+
+			proxy.EsSearch(pl, true, function(res1, xml, text){
+				baobiao1(res1, cateLabels, cateData);
+		    }, function(){$alert("获取核心刊数据失败，请稍后再试！");});
+			
+			pl.queryString = "ORG:"+$("#name").html()+" SCORE:0";
+			proxy.EsSearch(pl, true, function(res2, xml, text){
+				baobiao2(res2, cateLabels, cateData);
+		    }, function(){$alert("获取核心刊数据失败，请稍后再试！");});		
+			
+			pl.indexName = "wf_mds_en_qikan";
+			pl.queryString = "ORG:"+$("#name").html();
+			pl.facets = "YEAR";						
+
+			proxy.EsSearch(pl, true, function(res3, xml, text){
+				baobiao3(res3);
+		    }, function(){$alert("获取外文期刊论文产出情况失败，请稍后再试！");});
+			
+			proxy.EsSearch(pl, true, function(res4, xml, text){
+				baobiao4(res4);
+		    }, function(){$alert("获取外文期刊论文产出情况失败，请稍后再试！");});									
+        }
+		
+		function baobiao4(res4)
+		{
+		    $('#biao4').highcharts({
+		        title: {
+		            text: $("#orgname").html()+'-外文期刊论文收录发展趋势'
+		        },
+		        xAxis: {
+		            categories: ['2004','2005', '2006', '2006', '2007', '2008', '2009','2010', '2011', '2012', '2013', '2014']
+		        },
+		        yAxis: {
+		            title: {
+		                text: '发文量'
+		            },
+		            plotLines: [{
+		                value: 0,
+		                width: 1,
+		                color: '#808080'
+		            }]
+		        },
+		        legend: {
+		            //layout: 'vertical',
+		            //align: 'right',
+		            //verticalAlign: 'middle',
+		            borderWidth: 0
+		        },
+		        series: [{
+		            name: 'ESI',
+		            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+		        }, {
+		            name: 'SCI',
+		            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+		        }, {
+		            name: 'SSCI',
+		            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+		        }, {
+		            name: 'CELL',
+		            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+		        }]
+		    });			
+		}
+
+		function baobiao3(res3){
+		    $('#biao3').highcharts({
+		        title: {
+		            text: $("#orgname").html()+'-外文期刊论文收录分布情况',
+		            x: -20 //center
+		        },
+		        xAxis: {
+		            categories: ["ESI", "SCI"]
+		        },
+		        yAxis: {
+		            title: {
+		                text: '发文量'
+		            },
+		            plotLines: [{
+		                value: 0,
+		                width: 1,
+		                color: '#808080'
+		            }]
+		        },
+		        tooltip: {
+		            valueSuffix: '篇'
+		        },
+		        legend: {
+		            //layout: 'vertical',
+		            //align: 'right',
+		            //verticalAlign: 'middle',
+		            borderWidth: 0
+		        },
+		        series: [{
+		            name: '核心刊',
+		            data: [10000,30000]
+		        }]
+		    });						
+		}
+		
+		function baobiao2(res2,cateLabels, cateData){
+			var dataObj=eval("("+res2+")");
+			var i = 0;
+			var total = 0;
+	   		var cateLabels2 = [];
+			var cateData2 = [];			
+			for(var f in dataObj.facets.year){
+				cateLabels2[i]=f;
+				cateData2[i]=dataObj.facets.year[f];
+				total += cateData2[i];
+				i++;
+			}	
+						
+			$('#biao2').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        title: {
+		            text: $("#orgname").html()+'-核心期刊发文比重趋势'
+		        },
+		        xAxis: {
+		            categories: cateLabels2
+		        },
+		        yAxis: {
+		            min: 0,
+		            title: {
+		                text: '发文量'
+		            }
+		        },
+		        tooltip: {
+		            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br>',
+		            shared: true
+		        },
+		        plotOptions: {
+		            column: {
+		                stacking: 'percent'
+		            }
+		        },
+		            series: [{
+		            name: '核心刊',
+		            data: cateData
+		        }, {
+		            name: '非核心刊',
+		            data: cateData2
+		        }]
+		    });			
+		}
+		
+		function baobiao1(res1, cateLabels, cateData){
+			var dataObj=eval("("+res1+")");
+			var i = 0;
+			var total = 0;
+			for(var f in dataObj.facets.year){
+				cateLabels[i]=f;
+				cateData[i]=dataObj.facets.year[f];
+				total += cateData[i];
+				i++;
+			}	
+		    $('#biao1').highcharts({
+		        title: {
+		            text: $("#orgname").html()+'-中文核心期刊发文趋势',
+		            x: -20 //center
+		        },
+		        subtitle: {
+		            text: '核心发文量:' + total,
+		            x: -20
+		        },
+		        xAxis: {
+		            categories: cateLabels
+		        },
+		        yAxis: {
+		            title: {
+		                text: '发文量'
+		            },
+		            plotLines: [{
+		                value: 0,
+		                width: 1,
+		                color: '#808080'
+		            }]
+		        },
+		        tooltip: {
+		            valueSuffix: '篇'
+		        },
+		        legend: {
+		            //layout: 'vertical',
+		            //align: 'right',
+		            //verticalAlign: 'middle',
+		            borderWidth: 0
+		        },
+		        series: [{
+		            name: '核心刊',
+		            data: cateData
+		        }]
+		    });			
+		}
+
+		function failurecallback(res, xml, text, proxy) {
+			alert("服务器连接失败，请稍后再试！");
+		}		
+		
+        function gotproxycallback(proxy, wsdl, text) {
+			var queryStr="";		
+			var Request = zy_parse();
+			id = Request["id"];
+			name = Request["name"];			
+	        pl = {
+	            userName:"infosoft",
+	            password:"infosoft",
+				indexName:"wf_mds_daxue",
+	            queryString:"",
+				sortField:"",
+				fields:"",
+				pageNumber:"0",
+				pagePerNo:"10",
+				facets:"",
+	            fm:"@JSON"
+			}
+
+			if(id!=""&&id!=null&&id!=undefined){
+				queryStr="_id:"+id;
+			}else{
+				queryStr="NAME:\""+name+"\""
+			}
+			pl.queryString = queryStr;
+
+            if (proxy instanceof SOAPProxy) {
+               proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            } else {
+                alert("服务器连接失败，请稍后再试！");
+            }
+        }		
+		
+    	zy_init();
+        window.uexOnload = function(type){
+			if(!type)
+			{
+				try {
+					//$toast("正在加载...");
+		            SOAPProxyFabric.fromUrl("http://168.160.200.114/Search.svc?singlewsdl", true, gotproxycallback);
+		        } catch (x) {
+					//$closeToast();
+		            alert("服务器连接失败，请稍后再试！");
+		        }	     
+			}
+        }
+        function backHome(){
+            window.location.href="../index.html";
+        }
+        
+        
+        
+//分享按钮下拉效果---------------------------------------------------------
+        $(function(){
+            $('.a_share').click(function(){
+                $(this).next('.CXZS2015_Share_box').slideToggle('fast');
+            });
+        });        
+//分享---------------------------------------------------------------        
+        function shareWeixinText(){
+            var appKey = "wx072907fe8fe9143d";
+            var appSecret = "66da53db779e22ae3171a95836ea9340";
+            var registerUrl = "http://www.sciinfo.cn/";
+            uexWeiXin.registerApp(appKey);
+            //分享文字
+            //this.registerApp();
+            var txt = "这是来自AppCan中国最大的移动中间键平台对微信支持测试";
+            //分享场景 0：对话 1：朋友圈
+            var sence = 1;
+            uexWeiXin.sendTextContent(sence,txt);
+          }
+          
+        function shareSinaText(){
+            registerSina();
+               // 分享文本，支持分享文本到新浪微博
+                var txt = "这是来自SoTowerMobile平台对新浪微博分享支持测试";
+                uexSina.sendTextContent(txt);
+            }
+        function registerSina(){
+                var appKey = "xiaomi";
+                var appSecret = "3MqAdNoRLHomm4AECoURl7gds1sUIjun";
+                var registerUrl = "https://api.weibo.com/oauth2/authorize?client_id=86357585&redirect_uri=http://omma.com.cn";
+                //注册从新浪开放平台申请的appkey,appsecret,registerUrl。
+                uexSina.registerApp(appKey, appSecret, registerUrl);
+            }
+        function shareTentText(){
+            registerTent();
+                isText=0;
+                //分享文本，支持分享文本到腾讯微博
+                var txt = "这是AppCan平台对腾讯微博分享支持测试";
+                uexTent.sendTextContent(txt);
+            }
+            function registerTent(){
+                var appKey = "801338244";
+                var appSecret = "2428aa8e7478f6ea2c6171b48f5adcf7";
+                var registerUrl = "http://www.3g2win.com/";
+                //注册腾讯微博开放平台申请的appkey,appsecret,registerUrl
+                uexTent.registerApp(appKey, appSecret, registerUrl);
+            } 
+	</script>
+</html>

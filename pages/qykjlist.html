@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+
+    <head>
+        <title>前沿科技列表</title>
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=yse, minimum-scale=1.0, maximum-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+
+   <style>
+#Drag_div{margin:0 0.5rem;z-index: -1;}
+.Drag_nav{width:100%;overflow:hidden;margin:0 auto;height:35px;position:relative; line-height:35px;}
+.Drag_nav ul{position:absolute;left:0;top:0;width:640px;z-index:1;}
+.Drag_nav ul li{float:left; overflow:hidden; margin-left: 0.1rem;}
+.Drag_nav a{width:100%; display:block; text-decoration:none; text-align:center;}
+</style>
+ 
+        <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">
+
+
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <script src="../js/swipe.js"></script>
+        <!-- <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script> -->
+    </head>
+    
+    <body>
+        <div class="CXZS2015_header1" style="height: 5rem;">
+            <!--begin --lhc 2015年4月14日09:58:41-->
+            <div class="h_back" onclick="window.location.href='../index.html';" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <!--end --lhc 2015年4月14日09:58:41-->
+            <table class="h_TB1">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+                    <!--begin --lhc 2015年4月27日08:48:24-->
+            <div id="Drag_div" onselectstart="return false">
+                <div id="pic_list" class="Drag_nav">
+                  <ul id="Tab_Content">
+                            <li><a href="javascript:void(0);" onclick="GetByCategory('*')">热点推荐</a></li>
+                            <li><a href="javascript:void(0);" onclick="GetByCategory('前沿资讯')">前沿资讯</a></li>
+                            <li><a href="javascript:void(0);" onclick="GetByCategory('科技政策')">科技政策</a></li>
+                            <li><a href="javascript:void(0);" onclick="GetByCategory('科技金融')">科技金融</a></li>
+                            <li><a href="javascript:void(0);" onclick="GetByCategory('创业解读')">创业解读</a></li>
+                            <li><a href="javascript:void(0);" onclick="GetByCategory('热门产业')">热门产业</a></li>
+    
+                  </ul>
+                </div>
+            </div>
+        <!--end --lhc 2015年4月27日08:48:24-->
+        </div>
+
+        <div class="CXZS2015_bd2" id="main" style="padding-top: 5.5rem;"> 
+            <div id="mainlist"></div>
+            <div class="CXZS2015_listshow">
+                <span onclick="showTen();" id="spanTag" style="display:none;">点击显示20条</span>
+                <input type="hidden" id="page" value="0" />
+            </div>
+        </div>    
+                
+        <!--底部按钮栏设置,图标在css样式文件夹中修改-->
+        <div id="bottom" class="CXZS2015_bottom_all">
+        </div>
+    <script>
+        
+    </script>
+    </body>
+
+    <script>
+
+        var slider=new Swipe(document.getElementById('pic_list'),{speed:500,auto:0,width:70,col:7});
+    
+        var page = 0;
+        // begin --lhc 2015年4月14日10:09:46
+        var markPoint='';
+        var query='';
+        // end --lhc 2015年4月14日10:09:46
+        // begin --lhc 2015年4月27日08:54:13
+        //默认种类
+        var curCategory='*';
+        var drag_div=document.getElementById('pic_list');
+        // end --lhc 2015年4月27日08:54:13
+            //<!--begin --lhc 2015年4月27日08:48:24-->
+        function GetByCategory(category){
+            curCategory=category;
+            $("#mainlist").html('');
+            gotproxycallback();
+        }
+        // var x0 =0 ;  
+        // var drag = false;  
+        //var i=0;
+        //var drag_div=document.getElementById('Drag_div');
+        //var last_left,first_left;
+        // drag_div.ontouchstart = function (event) {  
+            // //if(!event) event = window.event;  
+            // //x0 = event.clientX;  
+            // //alert($("#last_c").position().right+','+$("#first_c").position().left);
+            // first_left=$("#first_c").position().left;
+            // last_left=$("#last_c").position().left;
+            // var touch = event.touches[0]; //获取第一个触点
+            // x0 =  Number(touch.pageX); //页面触点X坐标 
+            // drag = true;  
+            // //var a=document.getElementById("Tab_Content").style.marginLeft.substring(0,document.getElementById("Tab_Content").style.marginLeft.length-2);
+            // var a=$('#Tab_Content').css('marginLeft').substring(0,$('#Tab_Content').css('marginLeft').length-2);
+            // if(a!="")
+                // i=parseInt(a);
+//             
+        // }  
+        // drag_div.ontouchmove = function (event) {  
+            // if(drag) {  
+                // //if(!event) event = window.event;  
+                // //var x = event.clientX;  
+                // var touch = event.touches[0]; //获取第一个触点
+                // var x = Number(touch.pageX); //页面触点X坐标
+                // //当导航条位于最左侧,不能向右侧移动
+                // if(undefined !=first_left && first_left>=8 && x0<=x){
+                    // return;
+                // }
+                // // 当导航条位于最右侧,不能向左侧移动
+                // if(undefined !=last_left && last_left<=(document.body.clientWidth-50) && x0>=x){
+                    // return;
+                // }
+                // //document.getElementById("Tab_Content").style.marginLeft =  (i+(x-x0)) + "px";
+                // var margin_left=(i+(x-x0)) + "px";
+                // $('#Tab_Content').css('marginLeft',margin_left);
+//                 
+            // }  
+        // }  
+        // drag_div.ontouchend = function (event) { 
+            // //if(!event) event = window.event;  
+            // x0 = 0;  
+            // drag = false; 
+        // }    
+    //<!--end --lhc 2015年4月27日08:48:24-->
+        
+        function resultcallback(res) {
+            //$closeToast();
+            //var dataObj=eval("("+res+")");
+            var dataObj=res;
+            if(dataObj.length>0)
+            {
+                for(var i=0;i<dataObj.length;i++){
+                    var date="无";
+                    if(dataObj[i].modifytime!=null && ""!=dataObj[i].modifytime){
+                        var changeDate=new Date(dataObj[i].modifytime);
+                        date=changeDate.getFullYear()+"-"+(parseInt(changeDate.getMonth())+1)+"-"+changeDate.getDate();
+                    }
+                    //$("#mainlist").append('<a class="CXZS2015_row" href="qykjinfo.html?id='+dataObj.hits.hits[i]['_id']+'"><span class="r_title">'+dataObj.hits.hits[i]['_source']['title']+'</span><span class="r_left">'+(dataObj.hits.hits[i]['_source']['source']==null?"":(""+dataObj.hits.hits[i]['_source']['source']))+'</span><span class="r_right">'+(dataObj.hits.hits[i]['_source']['date']==null?"无":dataObj.hits.hits[i]['_source']['date']+"")+'</span><div class="CXZS2015_clear"></div></a>');
+                    // begin --lhc 2015年4月14日10:09:46
+                    $("#mainlist").append('<a name="'+dataObj[i].id+'" class="CXZS2015_row"  href="javascript:void(0)" onclick="jumpToInfo(\''+dataObj[i].id+'\');"><span class="r_title">'
+                    +dataObj[i].title+'</span><span class="r_left">'+(dataObj[i].source==null?"":(""+dataObj[i].source))
+                    +'</span><span class="r_right">'+date+'</span><div class="CXZS2015_clear"></div></a>');
+                    // end --lhc 2015年4月14日10:09:46
+                    //$("#mainlist").append('<a href="qykjinfo.html?id='+dataObj.hits.hits[i]['_id']+'"><div class="row"><div class="col-xs-12 uba"><div class="uinn5">'+dataObj.hits.hits[i]['_source']['name']+'</div><div class="ufl">'+(dataObj.hits.hits[i]['_source']['source']==null?"&nbsp&nbsp&nbsp&nbsp":("&nbsp&nbsp&nbsp&nbsp"+dataObj.hits.hits[i]['_source']['source']))+'</div><div class="ufr">'+(dataObj.hits.hits[i]['_source']['date']==null?"无":dataObj.hits.hits[i]['_source']['date']+"&nbsp&nbsp&nbsp&nbsp")+'</div></div></div></a>');
+                    //("#main").append('<div class="col-xs-12 uba"><a href="qykjinfo.html?id='+dataObj.hits.hits[i]['_id']+'">'+dataObj.hits.hits[i]['_source']['name']+'</a></div>'+(dataObj.hits.hits[i]['_source']['source']==null?"&nbsp&nbsp&nbsp&nbsp":("&nbsp&nbsp&nbsp&nbsp"+dataObj.hits.hits[i]['_source']['source']))+'</div>'+(dataObj.hits.hits[i]['_source']['date']==null?"无":dataObj.hits.hits[i]['_source']['date']+"&nbsp&nbsp&nbsp&nbsp")+'</div>');
+                }
+            }
+            else
+            {
+                $("#mainlist").append('<a class="CXZS2015_row" href="javascript:void(0);"><span class="l_name">未检索到结果</span><span class="CXZS2015_clear"></span></a>');
+            }
+            //判断当前页是否是最后一页
+            var pagenow=$("#page").val();
+            if(parseInt(dataObj.length)<20)
+            {
+                $("#spanTag").hide();
+
+            }else{
+                $("#spanTag").show();
+            }
+            //begin -lhc 2015年4月14日11:25:53
+            if(undefined!=markPoint && ''!=markPoint){
+                document.getElementsByName(markPoint)[0].focus();
+                markPoint='';
+                //location.hash=markPoint;
+            }
+            //end -lhc 2015年4月14日11:25:53
+        }
+                // begin --lhc 2015年4月14日10:09:46
+        function jumpToInfo(id){
+            markPoint=id;
+            window.location.href='qykjinfo.html?id='+id+'&q='+query+'&page='+page+'&c='+curCategory;
+        }
+        // end --lhc 2015年4月14日10:09:46
+        function failurecallback(res, xml, text, proxy) {
+            //$closeToast();
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function gotproxycallback() {
+            var query = $("#serValue").val();
+            var queryString = query==""||query==null?"*":query;
+            page=parseInt($("#page").val())+1;
+            var tMsg = {
+                callback: "success_jsonpCallback",
+                    rtype : "NEW" , pagesize: "20",pageno: page,
+                };
+            if(queryString!="*"){
+                tMsg.title=queryString;
+            }
+            if(curCategory!="*"){
+                tMsg.trade=curCategory;
+            }
+            $.ajax({
+                url: "http://omp.sciinfo.cn/index/third/user/newToJackson",//接口地址
+                type: "get",
+                dataType: "jsonp",
+                timeout: 20000,
+                cache: false,
+                async: false,
+                jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数
+                jsonpCallback: "success_jsonpCallback", //callback的function名称
+                data: tMsg,
+                error: function () {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                    
+                },
+                success: function (json) {
+                    resultcallback(json);
+                }
+            });
+        }
+        // 详细页面返回时触发
+        function gotproxycallback1() {
+            var query = $("#serValue").val();
+            var queryString = query==""||query==null?"*":query;
+            page=$("#page").val();
+            var tMsg = {
+                callback: "success_jsonpCallback",
+                rtype:"NEW",pagesize:(parseInt(page)+1)*20,pageno:"1",
+            };
+            if(queryString!="*"){
+                tMsg.title=queryString;
+            }
+            if(curCategory!="*"){
+                tMsg.trade=curCategory;
+            }
+            $.ajax({
+                url: "http://omp.sciinfo.cn/index/third/user/newToJackson",//接口地址
+                type: "get",
+                dataType: "jsonp",
+                timeout: 20000,
+                cache: false,
+                async: false,
+                jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数
+                jsonpCallback: "success_jsonpCallback", //callback的function名称
+                data: tMsg,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    ////$closeToast();
+                    alert(XMLHttpRequest.status);
+                    alert(textStatus);
+                    alert(errorThrown);
+                    alert("服务器连接失败，请稍后再试！");
+                    
+                },
+                success: function (json) {
+                    
+                }
+            });
+        }
+        function success_jsonpCallback(json) {
+            resultcallback(json);
+        }
+        function ser(){
+            if($("#serValue").val()!=''){
+                window.location.href='qykjlist.html?q=' + encodeURIComponent($("#serValue").val());
+            }else if($("#serValue").val()==''){
+                alert("检索词不能为空!");
+            }
+        }
+
+        zy_init();
+        window.onload = function(type){
+
+                var params = zy_parse();
+                if (params["q"])
+                {
+                    // begin --lhc 2015年4月14日10:09:46
+                    query=params["q"];
+                    // end --lhc 2015年4月14日10:09:46
+                    $("#serValue").val(params["q"]);
+                }
+                try {
+                    ////$toast("正在加载...");
+                    // begin --lhc 2015年4月14日10:09:46
+                    if(params["page"] && params["markPoint"]){
+                        if(undefined ==params["q"]){
+                            $("#serValue").val('');
+                        }
+                        $("#page").val(params["page"]);
+                        markPoint=params["markPoint"];
+                        curCategory=params["c"];
+                        gotproxycallback1();
+                    }else{
+                        gotproxycallback();
+                    }
+                    // end --lhc 2015年4月14日10:09:46
+                    //SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                } catch (x) {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }
+            
+        }
+        
+       
+            function showTen()
+            {
+                markPoint='';
+                $("#spanTag").html("正在加载...");
+                var pagenow =$("#page").val();
+                $("#page").val(parseInt(pagenow)+1);
+                SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                $("#spanTag").html("点击显示20条");
+            }
+    </script>
+</html>

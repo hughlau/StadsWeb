@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+
+    <head>
+        <meta charset="utf-8">
+        <title>sciinfo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="stylesheet" href="../css/mui.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">
+<script src="../js/jquery1.10.2.min.js"></script>
+        
+    </head>
+    <body>
+        <div class="CXZS2015_header1">
+            <span class="h_title">查找资料</span>
+            <div class="h_back" onclick="history.go(-1);" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+        </div>
+        <!-- http://168.160.200.118/ -->
+        <div class="CXZS2015_bd3">
+            <div class="iframepage" style="width:100%; overflow: hidden; margin-top: -0.5rem">
+              <iframe src="http://168.160.200.118/"  frameborder="0" width="102%" scrolling="yes" style=" margin:0 auto; overflow-y:scroll; overflow-x:hidden;background-color:white;  " class="iframepage" ></iframe>
+              <a href="" target="self"></a>
+            </div>              
+        </div>
+
+<!-- iframe 高度设置-->
+<script type="text/javascript" language="javascript"> 
+$(function(){    
+    var iheight = $(window).height() - $('.CXZS2015_header1').height() + 'px';
+    //alert(iheight);
+    $('.iframepage').css('height' , iheight);
+    //var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument; 
+    //if(ifm != null && subWeb != null) { 
+    //    ifm.height = subWeb.body.scrollHeight; 
+    //} 
+}); 
+</script>
+        
+        <!-- <script src="../js/app.js"></script> -->
+        <script type="text/javascript" charset="utf-8">
+            mui.init();
+            //处理点击事件，需要打开原生浏览器
+            mui('body').on('tap', 'a', function(e) {
+                var href = this.getAttribute('href');
+                if (href) {
+                    if (window.plus) {
+                        plus.runtime.openURL(href);
+                    } else {
+                        location.href = href;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

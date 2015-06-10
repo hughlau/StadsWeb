@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>专家首页</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+
+ 
+        <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">
+        
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        
+        
+    </head>
+    <body>
+        <!-- <header class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">查找专家</h1>
+            <button type="button" onclick="history.go(-1);" id="confirm" class="mui-btn mui-btn-link">
+                <span class="mui-icon mui-icon-back"></span>返回
+            </button>
+        </header> -->
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="backHome();" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+        </div>
+        
+    	<div class="CXZS2015_bd2">
+            <div class="CXZS2015_ZJ_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic1.png">
+                <span class="j_tt">院士学术排行榜</span>
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZJ_list" id='acadeAu_Ranking'>
+                <!-- <a class="l_one" href='zj_info.html?id=ZZ000002656123'>
+                    <span class="l_name">陈宗懋</span>
+                    <span class="l_company">中国农业科学院茶叶研究所</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">124</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">2230</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">1</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000006151945'>
+                    <span class="l_name">潘德炉</span>
+                    <span class="l_company">国家海洋局第二海洋研究所</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">48</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">264</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">2</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000006256928'>
+                    <span class="l_name">金翔龙</span>
+                    <span class="l_company">国家海洋局第二海洋研究所</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">31</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">217</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">3</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000010224302'>
+                    <span class="l_name">杨卫</span>
+                    <span class="l_company">浙江大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">86</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">129</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">4</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000009444955'>
+                    <span class="l_name">徐世烺</span>
+                    <span class="l_company">浙江大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">83</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">91</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">5</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a> -->
+            </div>
+            
+            <!-- <div class="CXZS2015_ZJ_title" >
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic1.png">
+                <span class="j_tt">中青年学者排行榜</span>
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZJ_list" id='scholarAu_Ranking'>
+                <a class="l_one" href='zj_info.html?id=ZZ000010225034'>
+                    <span class="l_name">褚健</span>
+                    <span class="l_company">浙江大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">206</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">4529</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">1</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000003188983'>
+                    <span class="l_name">范柏乃</span>
+                    <span class="l_company">浙江大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">158</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">2570</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">2</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000004323407'>
+                    <span class="l_name">胡培松</span>
+                    <span class="l_company">中国水稻研究所</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">67</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">923</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">3</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000006070485'>
+                    <span class="l_name">彭方正</span>
+                    <span class="l_company">浙江大学</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">53</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">716</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">4</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <a class="l_one" href='zj_info.html?id=ZZ000009676359'>
+                    <span class="l_name">俞晓平</span>
+                    <span class="l_company">中国计量学院</span>
+                    <span class="CXZS2015_clear"></span>
+                    <span class="l_num">总体发文：<span class="l_t1">95</span></span>
+                    <span class="l_num">被引次数：<span class="l_t1">391</span></span>
+                    <span class="l_num">学术活跃度：<span class="l_t1">5</span></span>
+                    <span class="CXZS2015_clear"></span>
+                </a>
+            </div> -->
+        </div>
+    	
+    	
+    	<!--底部按钮栏设置,图标在css样式文件夹中修改-->
+    	<div id="bottom" class="CXZS2015_bottom_all">
+        </div>
+
+    </body>
+	<script>
+		function ser(){
+			if($("#serValue").val()!=''){
+				window.location.href='zj_ser_list.html?q=' + encodeURIComponent($("#serValue").val());
+			}else if($("#serValue").val()==''){
+			    alert("检索词不能为空!");
+				// window.location.href='zj_tui_list.html?q=' + encodeURIComponent($("#serValue").val());
+			}
+		}
+		
+    	zy_init();
+        window.onload = function(type){
+			//if(!type)
+			//{
+               try{
+                    ////$toast("正在加载...");
+                    //var jsonBack='[{"id":1,"rankid":1,"fullname":"专家1","fullid":"1"},{"id":2,"rankid":1,"fullname":"专家2","fullid":"2"},{"id":3,"rankid":1,"fullname":"专家3","fullid":"3"}]';
+                    
+                    //document.getElementById('org_order').innerHtml='';
+                    
+                    var url = '';
+                    $.ajax({
+                        url: "http://omp.sciinfo.cn/index/third/user/rankToJackson",//接口地址
+                        type: "get",
+                        dataType: "jsonp",
+                        timeout: 20000,
+                        cache: false,
+                        async: false,
+                        jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数
+                        jsonpCallback: "success_jsonpCallback", //callback的function名称
+                        data: { rtype: "AU", PID: "STADS", callback: "success_jsonpCallback" },
+                        success: function (json) {
+                            
+                            ////$closeToast();
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            //调用失败    
+                            ////$closeToast();
+                            alert("服务器连接失败，请稍后再试！");
+                            return;
+                        },
+                    });
+
+
+                }catch(x) {
+                    ////$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }
+			//}
+        }
+        function success_jsonpCallback(json) {
+            var html = '';
+            //返回结果    
+            var obj = json;
+            for (var i = 0; i < obj.length; i++) {
+                html += '<a class="l_one" href="zj_info.html?id=' + obj[i].fullid + '">';
+                html += '    <span class="l_name">' + (obj[i].fullname == undefined ? "" : obj[i].fullname) + '</span>';
+                html += '    <span class="l_company">' + (obj[i].company == undefined ? "" : obj[i].company) + '</span>';
+                html += '    <span class="CXZS2015_clear"></span>';
+                html += '    <span class="l_num">总体发文：<span class="l_t1">' + (obj[i].fws == undefined ? "" : obj[i].fws) + '</span></span>';
+                html += '    <span class="l_num">被引次数：<span class="l_t1">' + (obj[i].bys == undefined ? "" : obj[i].bys) + '</span></span>';
+                html += '    <span class="l_num">学术活跃度：<span class="l_t1">' + (obj[i].hyd == undefined ? "" : obj[i].hyd) + '</span></span>';
+                html += '    <span class="CXZS2015_clear"></span>';
+                html += '</a>';
+
+            };
+            $('#acadeAu_Ranking').html(html);
+        }
+        function backHome(){
+            window.location.href="../index.html";
+        }
+	</script>
+</html>

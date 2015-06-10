@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>专家信息</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+ 
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">        
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <!-- <script src="../js/mui.min.js"></script> -->
+        <!-- <script src="../js/app.js"></script> -->
+        <script src="../js/highcharts.js"></script>
+        <!-- ECharts单文件引入 zwj 20150331  -->
+        <script src="../chart/js/echarts.js"></script>
+        <script src="../chart/js/snowdata.js"></script>
+        <!-- 保存图片 lbt 20150331  -->
+        <script src="../js/canvg.js"></script>
+        <script src="../js/saveimage.js"></script>        
+    </head>
+    <body>
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="history.go(-1);" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1" style="display:none;">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="CXZS2015_bd3" id="main">
+            <div class="CXZS2015_ZJ_MingPian">
+                <div class="z_MingPian">
+                    <div class="z_mp1"><span id="name"></span><span id="jobtitle" style="float: right;font-size:15px;"></span></div>
+                    <div class="z_mp2">
+                        <table>
+                            <tr>
+                                <td class="td1">工作单位：</td>
+                                <td><span id="org"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="td1">研究领域：</td>
+                                <td><span id="dis"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="td1">专家简介：</td>
+                                <td><span id="intro"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="z_mp3">
+                        <table>
+                            <tr>
+                                <td>被引次数：<span class="num" id="bycs"></span></td>
+                                <td>总体发文：<span class="num" id="ztfw"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="CXZS2015_ZJ_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic3.png">
+                <span class="j_tt">学术成果</span>
+                
+                <div class="CXZS2015_Share">
+                    <a herf="javascript:void(0)" class="a_share" onclick="transferSVGtoImage('line');">
+                        <img alt="" src="../images/CXZS_share_3.png">保存为图片
+                        <span class="CXZS2015_clear"></span>
+                    </a>
+                </div>
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+               <div class="row">
+                    <div class="col-xs-12">
+                        <div id="line" style="margin: 0 auto;height:200px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="CXZS2015_ZJ_title">
+                <img class="j_titlepic" alt="" src="../images/ZJ_title_pic4.png">
+                <span class="j_tt">学术合作</span>
+                <div class="CXZS2015_Share">
+                    <a herf="javascript:void(0)" class="a_share" onclick="transferCanvastoImage('xueshuxh');">
+                        <img alt="" src="../images/CXZS_share_3.png">保存为图片
+                        <span class="CXZS2015_clear"></span>
+                    </a>
+                </div>
+                <!--<div class="CXZS2015_Share" style="display:none;">
+                    <a herf="javascript:void(0)" class="a_share">
+                        <img alt="" src="../images/CXZS_share_2.png">分享
+                        <span class="CXZS2015_clear"></span>
+                    </a>
+                    <div class="CXZS2015_Share_box">
+                        <a class="s_one" onclick="shareWeixinText();">微信<img alt="" src="../images/CXZS_Share_ico2.png"></a>
+                        <a class="s_one" onclick="shareSinaText();">微博<img alt="" src="../images/CXZS_Share_ico1.png"></a>
+                        <a class="s_one" onclick="shareTentText();">Q Q<img alt="" src="../images/CXZS_Share_ico3.png"></a>
+                    </div>
+                </div>-->
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <div class="CXZS2015_ZT_pic">
+                <div id="xueshuxh" style="height:350px"></div> 
+                <!--<div class="row">
+                    <div class="col-xs-12" id="hezuozhe">
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <!-- 保存图片canvas  -->
+        <canvas id="myCanvas" style="display: none;"></canvas>
+        <!-- div>            
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    <img src="../css/images/hat.png" width="50">学术成果
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">                    
+                    <button onclick="transferImage('pie');" class="btn btn-default" type="button">分享</button>
+                    <div id="pie" style="margin: 0 auto;height:200px;">
+                    </div>
+                    <canvas id="myCanvas" style="display: none;"></canvas>
+                    <img src="" id="img" style="display: block;"/>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="line" style="margin: 0 auto;height:200px;">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    <img src="../css/images/zhongqingnian.png" width="50">学术合作
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" id="hezuozhe">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    <img src="../css/images/zhongqingnian.png" width="50">学术历史
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    期刊
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" id="qikan_xxx">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    主题
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" id="zhuti">
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-xs-12" style="margin-top:10px;">
+                    基金
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" id="jijin">
+                </div>
+            </div>
+        </div> -->
+        <!--底部按钮栏设置,图标在css样式文件夹中修改-->
+
+    </body>
+    <script>
+		var id,name;
+        var pl = {};
+		
+		function baseInfo(res){
+			var dataObj = eval("(" + res + ")");						
+            var bycs = 0;
+            var ztfw = 0;
+			
+            if (dataObj.hits.total > 0) {
+                ztfw = dataObj.hits.total;
+            }
+			
+            for (var i = 0; i < dataObj.hits.total; i++) {
+                if (dataObj.hits.hits[i]['_source']['rn'] > 0) {
+                    bycs = parseInt(bycs) + parseInt(dataObj.hits.hits[i]['_source']['rn']);
+                }
+            }
+			
+            $("#ztfw").html(ztfw);
+            $("#bycs").html(bycs);			
+		}
+		
+		function fenbutuInfo(res,name){
+            var dataObj = eval("(" + res + ")");
+			var yeardata = [];
+			var yearcategories = [];
+			var i = 0;
+            for (var m in dataObj.facets.year) {
+                yeardata[i] = dataObj.facets.year[m];
+				yearcategories[i] = m;
+				i++; 
+            }
+								
+            $('#line').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: name+'-发文数量年度分布图'
+                },
+                xAxis: {
+					categories:yearcategories,
+                    labels: {
+                        enabled: true
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: ""
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: true
+                },
+                plotOptions: {
+                    spline: {
+                        lineWidth: 4,
+                        states: {
+                            hover: {
+                                lineWidth: 5
+                            }
+                        },
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                series: [{
+                    name: '年份',
+                    data: yeardata	                    
+                }],
+                navigation: {
+                    menuItemStyle: {
+                        fontSize: '10px'
+                    }
+                }
+            });			
+		}
+		
+		function xueshuhezuoInfo(res, name){
+            var arry = new Array();
+            var dataObj = eval("(" + res + ")");
+            
+            //get snow chart person data  
+            //zwj  20150331 
+            var option = getxueshuhzdata(name,dataObj.facets.au); 
+            loadSnowChart('xueshuxh',option);
+            /* 
+            var html = '<table class="table table-bordered table-condensed" style="width:95%;margin:0 auto;"><tr style="background-color:#ffffcc;"><td style="text-align:center;">合作者</td><td style="text-align:center;">篇数</td></tr>';
+            for (var m in dataObj.facets.au) {
+				if (m == name)
+					continue;
+                html += '<tr><td>' + m + '</td><td>' + dataObj.facets.au[m] + '</td></tr>';
+            }
+            html += '</table>';
+            $("#hezuozhe").html(html);			
+            */
+		}
+        
+		function qikanInfo(res){
+            var arry = new Array();
+            var dataObj = eval("(" + res + ")");
+            
+            var html = '<table class="table table-bordered table-condensed" style="width:95%;margin:0 auto;"><tr style="background-color:#ffffcc;"><td style="text-align:center;">年份</td><td style="text-align:center;">刊名</td><td style="text-align:center;">影响因子</td><td style="text-align:center;">篇数</td></tr>';
+            for (var m in dataObj.hits.hits) {
+                html += '<tr><td>' + dataObj.hits.hits[m]['_source']['year'] + '</td><td>' + dataObj.hits.hits[m]['_source']['cn'] + '</td><td>' + dataObj.hits.hits[m]['_source']['impactfactor'] + '</td><td>' + dataObj.hits.hits[m]['_source']['acode'] + '</td></tr>';
+            }
+            html += '</table>';
+            $("#qikan").html(html);			
+		}
+		
+		function zhutiInfo(res){
+            var arry = new Array();
+            var dataObj = eval("(" + res + ")");
+            var html = '<table class="table table-bordered table-condensed" style="width:95%;margin:0 auto;"><tr style="background-color:#ffffcc;"><td style="text-align:center;">年份</td><td style="text-align:center;">主题名</td></tr>';
+            for (var m in dataObj.hits.hits) {
+                // var temp = delChar(dataObj.hits.hits[m]['_source']['ckey']);
+                //var temp = "史蒂夫史蒂夫";
+                var temp = dataObj.hits.hits[m]['_source']['ckey'];
+                temp=temp==null?"无":temp.replace(/%/gm,';');
+                html += '<tr><td>' + dataObj.hits.hits[m]['_source']['year'] + '</td><td>' + temp+ '</td></tr>';
+            }
+            html += '</table>';
+            $("#zhuti").html(html);			
+		}
+		
+		function jijinInfo(res){
+            var arry = new Array();
+            var dataObj = eval("(" + res + ")");
+            var html = '<table class="table table-bordered table-condensed" style="width:95%;margin:0 auto;"><tr style="background-color:#ffffcc;"><td style="text-align:center;">年份</td><td style="text-align:center;">基金名</td></tr>';
+            for (var m in dataObj.hits.hits) {
+                html += '<tr><td>' + dataObj.hits.hits[m]['_source']['year'] + '</td><td>' + dataObj.hits.hits[m]['_source']['fpn'] + '</td></tr>';
+            }
+            html += '</table>';
+            $("#jijin").html(html);			
+		}
+		
+        function getUserInfo(exp, infoType, num, name, org, proxy){
+
+			pl.pagePerNo = num;
+			pl.queryString = exp;
+							
+            if (infoType == "base") {
+				pl.indexName = "wf_mds_chn_qikan";				
+				proxy.EsSearch(pl, true, function(res){
+					baseInfo(res)
+				}, function(){$alert("获取学者信息错误，请稍后再试！");});
+            }
+			
+            if (infoType == "chengguochanchu") {
+				var qikanNum = 0;
+				var chengguo = 0;
+				var huiyi = 0;
+				var zhuanli = 0;
+				
+				pl.indexName = "wf_mds_chn_qikan";
+                proxy.EsSearch(pl, false, function(res){
+                    var dataObj = eval("(" + res + ")");
+                    qikanNum = dataObj.hits.total > 0 ? dataObj.hits.total : 0;
+                }, function(){$alert("获取成果产出数据失败，请稍后再试！");});
+				
+				pl.indexName = "wf_mds_chn_huiyi";
+				proxy.EsSearch(pl, false, function(res1){
+                    var dataObj = eval("(" + res1 + ")");
+                    huiyi = dataObj.hits.total > 0 ? dataObj.hits.total : 0;
+				}, function(){$alert("获取成果产出数据失败，请稍后再试！");});
+				
+				pl.indexName = "wf_mds_chn_xuewei,wf_mds_chn_cstad,wf_mds_chn_book";
+                proxy.EsSearch(pl, false, function(res2){
+					var dataObj = eval("(" + res2 + ")");
+					chengguo = dataObj.hits.total > 0 ? dataObj.hits.total : 0;
+				}, function(){$alert("获取成果产出数据失败，请稍后再试！");});	
+				
+				pl.indexName = "wf_mds_chn_zhuanli";
+                proxy.EsSearch(pl, false, function(res3){
+                    var dataObj = eval("(" + res3 + ")");
+                    zhuanli = dataObj.hits.total > 0 ? dataObj.hits.total : 0;		
+				}, function(){$alert("获取成果产出数据失败，请稍后再试！");});
+				
+				$('#pie').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: name+'-成果产出'
+                    },
+                    credits: {
+                        enabled: true
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: false,
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: null,
+                        data: [['期刊(' + qikanNum + ')', qikanNum], ['成果(' + chengguo + ')', chengguo], ['会议(' + huiyi + ')', huiyi], ['专利(' + zhuanli + ')', zhuanli]]
+                    }]
+                });	
+                //begin add lbt 20140403
+                pl.indexName = "wf_mds_auth_new";
+                pl.queryString="NAME:\""+name+"\" AND ORG:\""+org+"\"";
+                proxy.EsSearch(pl, false, function(res){
+                    var dataObj = eval("(" + res + ")");
+                    if(dataObj.hits.hits.length>0)
+                    {
+                        $("#jobtitle").html(dataObj.hits.hits[0]['_source']['jobtitle']);
+                        $("#intro").html(dataObj.hits.hits[0]['_source']['intro']);
+                    }
+                    else
+                    {
+                        $("#jobtitle").html("");
+                        $("#intro").html("暂无");
+                    }
+                    
+                }, function(){$alert("获取成果产出数据失败，请稍后再试！");});
+                //end add lbt 20140403						
+			}
+			
+			if (infoType == "fenbutu") {
+				pl.indexName ="wf_mds_chn_qikan,wf_mds_chn_huiyi,wf_mds_chn_zhuanli,wf_mds_chn_cstad";
+				pl.facets = "YEAR";
+				
+				proxy.EsSearch(pl, true, function(res){
+					fenbutuInfo(res,name);
+            	}, function(){$alert("获取发文数量分布失败，请稍后再试！");});				
+			}
+			
+			if (infoType == "xueshuhezuo") {
+			 	pl.indexName = "wf_mds_chn_qikan";
+				pl.pagePerNo = num;
+				pl.facets = "AU";
+				
+				proxy.EsSearch(pl, true, function(res){
+					xueshuhezuoInfo(res, name)
+                }, function(){$alert("获取学术合作数据失败，请稍后再试！");});				
+			}
+			
+			if (infoType == "qikan") {
+				pl.indexName = "wf_mds_journal";
+				pl.facets = null;
+				proxy.EsSearch(pl, true, function(res){
+					qikanInfo(res);
+                }, function(){$alert("获取期刊历史失败，请稍后再试！");});				
+			}
+			
+            if (infoType == "zhuti") {
+				pl.indexName = "wf_mds_chn_qikan";
+				pl.facets = null;
+				proxy.EsSearch(pl, true, function(res){
+					zhutiInfo(res)
+                }, function(){$alert("获取主题数据失败，请稍后再试！");});
+            }
+			
+            if (infoType == "jijin") {
+				pl.indexName = "wf_mds_chn_qikan";
+				pl.queryString = exp + " AND FPN:基金";
+				pl.facets = null;
+				
+                proxy.EsSearch(pl, true, function(res){
+					jijinInfo(res);
+                }, function(){$alert("获取基金数据失败，请稍后再试！");});
+            }
+        }
+        
+        function resultcallback(res, xml, text, proxy){
+            //$closeToast();
+            var dataObj = eval("(" + res + ")");
+            var org = dataObj.hits.hits[0]['_source']['org'];
+            var name = dataObj.hits.hits[0]['_source']['name'];
+            var dis = dataObj.hits.hits[0]['_source']['dis'];
+            var results = org.split("%");
+            var queryString = '';
+						
+            $("#name").html(name);
+            $("#dis").html(dis.replace(/%/g," "));
+            $("#titlename").html(name);	
+            
+            for (var i = 0; i < results.length; i++) {
+                if (results[i].indexOf("^A") >= 0 && results[i].indexOf("^B") > 0) {
+                    results[i] = results[i].substring(2, results[i].indexOf("^B"));
+                }
+                else 
+                    if (results[i].indexOf("^A") >= 0) {
+                        results[i] = results[i].substring(0, results[i].indexOf("^B"));
+                    }
+                
+                queryString = queryString + "(AUTHOR:" + name + " AND ORG:" + results[i] + ") OR ";
+            }
+			
+			$("#org").html(results.join(";"));
+								
+            if (queryString.length > 0) {
+                queryString = queryString.substring(0, queryString.length - 4);
+            }
+            else {
+                queryString ="AUTHOR:吴广印";
+            }
+            getUserInfo(queryString, "base", 1000, name, org, proxy);
+            getUserInfo(queryString, "chengguochanchu", 10, name, org, proxy);
+            getUserInfo(queryString, "fenbutu", 10, name, org, proxy);
+            getUserInfo(queryString.replace("AUTHOR:", "AU:"), "xueshuhezuo", 11, name, org, proxy);
+            getUserInfo(queryString, "zhuti", 10, name, org, proxy);
+            getUserInfo(queryString, "jijin", 10, name, org, proxy);
+            getUserInfo(queryString, "qikan", 10, name, org, proxy);
+        }
+        
+        function failurecallback(res, xml, text, proxy){
+			//$closeToast();
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function gotproxycallback(proxy, wsdl, text){
+			var Request = zy_parse();
+			id = Request["id"];
+			name = Request["name"];					
+			pl = {
+	            userName: "!@#$4321!@#$",
+	            password: "!@#$4321!@#$",
+	            indexName: "wf_mds_experts",
+	            queryString: "_id:" + id,
+	            sortField: "",
+	            fields: "",
+	            pageNumber: "0",
+	            pagePerNo: "5",
+	            facets: "",
+	            fm: "@JSON"
+        	};
+		        
+            if (proxy instanceof SOAPProxy) {
+                proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            }
+            else {
+				//$closeToast();
+                alert("服务器连接失败，请稍后再试！");
+            }
+        }
+        
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                try {
+					//$toast("正在加载...");
+                    SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback); 
+                } 
+                catch (x) {
+					//$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }
+            }
+        }
+        function ser(){
+            if($("#serValue").val()!=''){
+                window.location.href='zj_ser_list.html?q=' + encodeURIComponent($("#serValue").val());
+            }else if($("#serValue").val()==''){
+                alert("检索词不能为空!");
+                // window.location.href='zj_tui_list.html?q=' + encodeURIComponent($("#serValue").val());
+            }
+        }
+        
+        function backHome(){
+            window.location.href="../index.html";
+        }
+        
+        // function delChar(var text){
+            // alert("ttttttttttt");
+            // text = text.replace("%",",");
+            // // return(text);s
+//             
+        // }
+        
+        
+
+//分享按钮下拉效果---------------------------------------------------------
+        $(function(){
+            $('.a_share').click(function(){
+                $(this).next('.CXZS2015_Share_box').slideToggle('fast');
+            });
+        });        
+//分享---------------------------------------------------------------        
+        function shareWeixinText(){
+            var appKey = "wx072907fe8fe9143d";
+            var appSecret = "66da53db779e22ae3171a95836ea9340";
+            var registerUrl = "http://www.sciinfo.cn/";
+            uexWeiXin.registerApp(appKey);
+            //分享文字
+            //this.registerApp();
+            var txt = "这是来自AppCan中国最大的移动中间键平台对微信支持测试";
+            //分享场景 0：对话 1：朋友圈
+            var sence = 1;
+            uexWeiXin.sendTextContent(sence,txt);
+          }
+          
+        function shareSinaText(){
+            registerSina();
+               // 分享文本，支持分享文本到新浪微博
+                var txt = "这是来自SoTowerMobile平台对新浪微博分享支持测试";
+                uexSina.sendTextContent(txt);
+            }
+        function registerSina(){
+                var appKey = "xiaomi";
+                var appSecret = "3MqAdNoRLHomm4AECoURl7gds1sUIjun";
+                var registerUrl = "https://api.weibo.com/oauth2/authorize?client_id=86357585&redirect_uri=http://omma.com.cn";
+                //注册从新浪开放平台申请的appkey,appsecret,registerUrl。
+                uexSina.registerApp(appKey, appSecret, registerUrl);
+            }
+        function shareTentText(){
+            registerTent();
+                isText=0;
+                //分享文本，支持分享文本到腾讯微博
+                var txt = "这是AppCan平台对腾讯微博分享支持测试";
+                uexTent.sendTextContent(txt);
+            }
+            function registerTent(){
+                var appKey = "801338244";
+                var appSecret = "2428aa8e7478f6ea2c6171b48f5adcf7";
+                var registerUrl = "http://www.3g2win.com/";
+                //注册腾讯微博开放平台申请的appkey,appsecret,registerUrl
+                uexTent.registerApp(appKey, appSecret, registerUrl);
+            } 
+    </script>
+    <script type="text/javascript">
+        //zwj 20150331
+        function loadSnowChart(snowchart,option){
+            // 路径配置
+            require.config({
+                paths: {    echarts: '../chart/build/dist'}
+            });
+            
+            // 使用
+            require(['echarts', 'echarts/chart/force' // 使用柱状图就加载bar模块，按需加载
+                ], function(ec){
+                    // 基于准备好的dom，初始化echarts图表
+                    var chartcontrol = ec.init(document.getElementById(snowchart));
+                    
+                    // 为echarts对象加载数据 
+                    chartcontrol.setOption(option);
+
+                });
+        }
+            
+        </script>
+</html>

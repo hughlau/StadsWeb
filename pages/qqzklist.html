@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+
+    <head>
+        <title>全球智库列表</title>
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=yse, minimum-scale=1.0, maximum-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+
+ 
+ 
+        <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">        
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <!-- <style>
+            .selectSearch{
+                background-color:#0066FF;
+                padding:1px;color:#fff;
+            }
+        </style> -->
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+    </head>
+    
+    <body>
+        <div class="CXZS2015_header1">
+            <!--begin --lhc 2015年4月14日09:58:41-->
+            <div class="h_back" onclick="window.location.href='../index.html';" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <!--end --lhc 2015年4月14日09:58:41-->
+            <table class="h_TB1">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="CXZS2015_bd2" id="main"> 
+            <div id="mainlist"></div>
+            <div class="CXZS2015_listshow">
+                <span onclick="showTen();" id="spanTag" style="display:none;">点击显示20条</span>
+                <input type="hidden" id="page" value="0" />
+            </div>
+        </div>    
+                
+        <!--底部按钮栏设置,图标在css样式文件夹中修改-->
+        <div id="bottom" class="CXZS2015_bottom_all">
+        </div>        
+            
+    </body>
+    
+    <script>
+         var page = 0;
+        // begin --lhc 2015年4月14日10:09:46
+        var markPoint='';
+        var query='';
+        // end --lhc 2015年4月14日10:09:46
+        function resultcallback(res) {
+            //$closeToast();
+            var dataObj=res;
+            if(dataObj.length>0)
+            {
+                for(var i=0;i<dataObj.length;i++){
+                    // begin --lhc 2015年4月14日10:09:46
+                    var str_listInfo='';
+                    str_listInfo+='<a name="'+dataObj[i].id+'" class="CXZS2015_row"  href="javascript:void(0)" onclick="jumpToInfo(\''+dataObj[i].id+'\');" >';
+                    str_listInfo+='<span class="r_title">'+dataObj[i].title+'</span>';
+                    str_listInfo+='<span class="r_left">'+(dataObj[i].author==null?"":(""+dataObj[i].author))+'</span>';
+                    var date="无";
+                    if(dataObj[i].modifytime!=null && ""!=dataObj[i].modifytime){
+                        var changeDate=new Date(dataObj[i].modifytime);
+                        date=changeDate.getFullYear()+"-"+(parseInt(changeDate.getMonth())+1)+"-"+changeDate.getDate();
+                    }
+                    str_listInfo+='<span class="r_right">'+date+'</span>';
+                    str_listInfo+='<div class="CXZS2015_clear"></div></a>';
+                    $("#mainlist").append(str_listInfo);
+                    // end --lhc 2015年4月14日10:09:46
+                    //$("#mainlist").append('<a class="CXZS2015_row" href="qykjinfo.html?id='+dataObj.hits.hits[i]['_id']+'"><span class="r_title">'+dataObj.hits.hits[i]['_source']['title']+'</span><span class="r_left">'+(dataObj.hits.hits[i]['_source']['source']==null?"":(""+dataObj.hits.hits[i]['_source']['source']))+'</span><span class="r_right">'+(dataObj.hits.hits[i]['_source']['date']==null?"无":dataObj.hits.hits[i]['_source']['date']+"")+'</span><div class="CXZS2015_clear"></div></a>');
+                }
+            }
+            else
+            {
+                $("#mainlist").append('<a class="CXZS2015_row" href="javascript:void(0);"><span class="l_name">未检索到结果</span><span class="CXZS2015_clear"></span></a>');
+            }
+           //判断当前页是否是最后一页
+            var pagenow=$("#page").val();
+            if(parseInt(dataObj.length)<20)
+            {
+                $("#spanTag").hide();
+
+            }else{
+                $("#spanTag").show();
+            }
+            if(undefined!=markPoint && ''!=markPoint){
+                document.getElementsByName(markPoint)[0].focus();
+                //location.hash=markPoint;
+            }
+            //end -lhc 2015年4月14日11:25:53
+        }
+        // begin --lhc 2015年4月14日10:09:46
+        function jumpToInfo(id){
+            markPoint=id;
+            window.location.href='qqzkinfo.html?id='+id+'&q='+query+'&page='+page;
+        }
+        // end --lhc 2015年4月14日10:09:46
+        function failurecallback(res, xml, text, proxy) {
+            //$closeToast();
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function gotproxycallback() {
+            var query = $("#serValue").val();
+            var queryString = query==""||query==null?"*":query;
+            page=parseInt($("#page").val())+1;
+            var tMsg;
+            if(queryString=="*"){
+                tMsg = {
+                    callback: "success_jsonpCallback",
+                    rtype : "TANK" , pagesize: "20",pageno: page
+                };
+            }else{
+                tMsg={
+                    rtype : "TANK" , pagesize: "20",pageno:page,title:queryString
+                };
+            }
+            $.ajax({
+                url: "http://omp.sciinfo.cn/index/third/user/newToJackson",//接口地址
+                type: "get",
+                dataType: "jsonp",
+                timeout: 20000,
+                cache: false,
+                async: false,
+                jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数
+                jsonpCallback: "success_jsonpCallback", //callback的function名称
+                data: tMsg,
+                error: function () {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                    
+                },
+                success: function (json) {
+                    
+                }
+            });
+            
+        }
+        function success_jsonpCallback(json) {
+            resultcallback(json);
+        }
+        //begin --lhc 2015年4月14日10:29:08
+        function gotproxycallback1() {
+            var query = $("#serValue").val();
+            var queryString = query==""||query==null?"*":query;
+            page=$("#page").val();
+            var tMsg;
+            if(queryString=="*"){
+                tMsg = {
+                    callback: "success_jsonpCallback",
+                    rtype : "TANK" , pagesize: (parseInt(page)+1)*20,pageno: "1"
+                };
+            }else{
+                tMsg={
+                    rtype : "TANK" , pagesize: (parseInt(page)+1)*20,pageno:"1",title:queryString
+                };
+            }
+            $.ajax({
+                url: "http://omp.sciinfo.cn/index/third/user/newToJackson",//接口地址
+                type: "get",
+                dataType: "jsonp",
+                timeout: 20000,
+                cache: false,
+                async: false,
+                jsonp: "callbackparam", //服务端用于接收callback调用的function名的参数
+                jsonpCallback: "success_jsonpCallback", //callback的function名称
+                data: tMsg,
+                error: function () {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                    
+                },
+                success: function (json) {
+                    //resultcallback(json);
+                }
+            });
+        }
+        //end --lhc 2015年4月14日10:29:08
+        function ser(){
+            if($("#serValue").val()!=''){
+                window.location.href='qqzklist.html?q=' + encodeURIComponent($("#serValue").val());
+            }else if($("#serValue").val()==''){
+                $alert("检索词不能为空!");
+                // window.location.href='zj_tui_list.html?q=' + encodeURIComponent($("#serValue").val());
+            }
+        }
+
+        zy_init();
+        window.onload = function(type){
+
+                var params = zy_parse();
+                if (params["q"])
+                {
+                    // begin --lhc 2015年4月14日10:09:46
+                    query=params["q"];
+                    // end --lhc 2015年4月14日10:09:46
+                    $("#serValue").val(params["q"]);
+                    
+                }
+                try {
+                    //$toast("正在加载...");
+                    // SOAPProxyFabric.fromUrl("http://168.160.200.114/Search.svc?singlewsdl", true, gotproxycallback);
+                    // begin --lhc 2015年4月14日10:09:46
+                    if(params["page"] && params["markPoint"]){
+                        if(undefined ==params["q"]){
+                            $("#serValue").val('');
+                        }
+                        $("#page").val(params["page"]);
+                        markPoint=params["markPoint"];
+                        gotproxycallback1();
+
+                        //SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback1);
+                    }else{
+                        gotproxycallback();
+                        //SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                    }
+                    // end --lhc 2015年4月14日10:09:46
+                } catch (x) {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }
+            
+        }
+        
+        //mui pull frefresh
+                mui.init({
+                    swipeBack: false,
+                    pullRefresh: {
+                        container: '#pullrefresh',
+                        down: {
+                            callback: pulldownRefresh
+                        },
+                        up: {
+                            contentrefresh: '正在加载...',
+                            callback: pullupRefresh
+                        }
+                    }
+                });
+                /**
+                 * 下拉刷新具体业务实现
+                 */
+                function pulldownRefresh() {
+                    /*setTimeout(function() {
+                        page  += 10;
+                        ser();
+                        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+                    }, 1000);*/
+                }
+                
+//              function pulldownRefresh() {
+//                  setTimeout(function() {
+//                      var table = document.body.querySelector('.mui-table-view');
+//                      var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//                      for (var i = cells.length, len = i + 3; i < len; i++) {
+//                          var li = document.createElement('li');
+//                          li.className = 'mui-table-view-cell';
+//                          li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+//                          //下拉刷新，新纪录插到最前面；
+//                          table.insertBefore(li, table.firstChild);
+//                      }
+//                      mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+//                  }, 1000);
+//              }
+                var count = 0;
+                /**
+                 * 上拉加载具体业务实现
+                 */
+                function pullupRefresh() {
+                    /*setTimeout(function() {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+                        var table = document.body.querySelector('.mui-table-view');
+                        var cells = document.body.querySelectorAll('.mui-table-view-cell');
+                        for (var i = cells.length, len = i + 20; i < len; i++) {
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+                            li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+                            table.appendChild(li);
+                        }
+                    }, 1000);*/
+                    
+                   showTen();
+                }
+            function showTen()
+            {
+                markPoint='';
+                $("#spanTag").html("正在加载...");
+                var pagenow =$("#page").val();
+                $("#page").val(parseInt(pagenow)+1);
+                SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                $("#spanTag").html("点击显示20条");
+            }
+    </script>
+</html>

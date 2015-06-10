@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>专家查找</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no"> 
+ 
+        <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">        
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        
+        
+    </head>
+    <body>
+        <div class="CXZS2015_header1">
+            <div class="h_back" onclick="historyBack();" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <table class="h_TB1">
+                <tr>
+                    <td><input name="serValue" class="input1" id="serValue" type="text"></td>
+                    <td><button onclick="ser();" class="button1" type="button">查</button></td>
+                </tr>
+            </table>
+        </div>
+               
+        
+        <div class="CXZS2015_bd2" id="main"> 
+            <div id="mainlist" class="CXZS2015_ZJ_list">
+            </div>
+            <div class="CXZS2015_listshow">
+                <span onclick="showTen();" id="spanTag" style="display:none;">点击显示10条</span>
+                <input type="hidden" id="page" value="0" />
+            </div>
+        </div>
+        
+        <div id="bottom" class="CXZS2015_bottom_all">
+        </div>
+        
+        
+    
+    </body>
+    <script>
+        var query = "*";
+        var page=0;
+        //begin add lhc 20150403
+        var currentname="";
+        function historyBack(){
+                window.location.href="zj_index.html";
+        }
+        //end add lhc 20150403
+        function resultcallback(res, xml, text, proxy) {
+            //$closeToast();
+            var dataObj=eval("("+res+")");
+            //begin add lhc 20150403
+            if(null!=dataObj && dataObj.hitsCount==1&&dataObj.hits.hits[0]['_source']['name']==currentname){
+               window.location.href="zj_info.html?isOneResult=true&id="+dataObj.hits.hits[0]['_id']; 
+                return;
+            }
+            //end add lhc 20150403
+            var html = "";
+            
+            //判断当前页是否是最后一页
+            var pagenow=$("#page").val();
+            if(parseInt(dataObj.hits.total)>10)
+            {
+            if(parseInt(dataObj.hits.total)%10>parseInt(pagenow))
+            {                    
+                $("#spanTag").show();
+                }
+            }
+            if(dataObj.hits.total>0)
+            {
+                for(var i=0;i<dataObj.hits.total;i++){
+                    var experts=dataObj.hits.hits[i]['_source']['name'];
+                    var expertId=dataObj.hits.hits[i]['_id']
+                    var work = dataObj.hits.hits[i]['_source']['work'];
+                    //begin add lhc 20150403
+                $("#mainlist").append('<a class="l_one" href="zj_info.html?q='+query+'&id='+expertId+'"><span class="l_name">'+experts+'</span><span class="CXZS2015_clear"></span><span class="l_company" style="margin-top:-0.125rem">工作单位：'+work+'</span><span class="CXZS2015_clear"></span></a>');
+                //end add lhc 20150403
+				}
+            }
+            else
+            {
+                $("#mainlist").append('<a class="l_one" href="javascript:void(0);"><span class="l_name">未检索到结果</span><span class="CXZS2015_clear"></span></a>');
+            }
+        }
+        
+        function failurecallback(res, xml, text, proxy) {
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function gotproxycallback(proxy, wsdl, text) {
+            page=$("#page").val();
+            var pl = {
+                "userName":"!@#$4321!@#$",
+                "password":"!@#$4321!@#$",
+                "indexName":"wf_mds_experts",
+                // "queryString":"NAME:"+query,
+                "queryString":"NAME:"+"*"+query+"*",
+                "sortField":"",
+                "fields":"",
+                "pageNumber":page,
+                "pagePerNo":"10",
+                "facets":"",
+                "fm":"@JSON"
+            };
+            if (proxy instanceof SOAPProxy) {
+               proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            } else {
+                alert("服务器连接失败，请稍后再试！");
+            }
+        }
+        
+        zy_init();
+        window.uexOnload = function(type){
+            if(!type)
+            {   
+                var params = zy_parse();
+                // alert("$$$$$$$");
+                if (params["q"])
+                {
+                    query = params["q"];
+                }
+                currentname=query;
+                try {
+                    //$toast("正在加载...");
+                    SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                    //uexWindow.toast(1,5,"正在加载...",0);
+                } catch (x) {
+                    alert("服务器连接失败，请稍后再试！");
+                }           
+            }
+        }
+        mui.init({
+                    swipeBack: false,
+                    pullRefresh: {
+                        container: '#pullrefresh',
+                        down: {
+                            callback: pulldownRefresh
+                        },
+                        up: {
+                            contentrefresh: '正在加载...',
+                            callback: pullupRefresh
+                        }
+                    }
+                });
+                function pulldownRefresh() {
+                    /*setTimeout(function() {
+                        page  += 10;
+                        ser();
+                        mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+                    }, 1000);*/
+                }
+                 var count = 0;
+                /**
+                 * 上拉加载具体业务实现
+                 */
+                function pullupRefresh() {
+                    /*setTimeout(function() {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+                        var table = document.body.querySelector('.mui-table-view');
+                        var cells = document.body.querySelectorAll('.mui-table-view-cell');
+                        for (var i = cells.length, len = i + 20; i < len; i++) {
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+                            li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+                            table.appendChild(li);
+                        }
+                    }, 1000);*/
+                    
+                   showTen();
+                }
+        function ser(){
+            if($("#serValue").val()!=''){
+                window.location.href='zj_ser_list.html?q=' + encodeURIComponent($("#serValue").val());
+            }else if($("#serValue").val()==''){
+                alert("检索词不能为空!");
+                // window.location.href='zj_tui_list.html?q=' + encodeURIComponent($("#serValue").val());
+            }
+        }
+                
+        function backHome(){
+            window.location.href="../index.html";
+        }
+             function showTen()
+            {
+                $("#spanTag").html("正在加载...");
+                var pagenow =$("#page").val();
+                $("#page").val(parseInt(pagenow)+1);
+                SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                $("#spanTag").html("点击显示10条");
+            }
+    </script>
+</html>

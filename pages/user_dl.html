@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>用户登录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!-- <link rel="stylesheet" href="../css/mui.min.css">
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script> -->
+		
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/mui.min.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/zy_control.js"></script>
+        <script src="../js/mui.min.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/main_2nd.js"></script>
+		
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			h5 {
+				margin: 5px 7px;
+			}
+		</style>
+		<script>
+            mui.init();
+        </script>
+		
+	</head>
+
+	<body>
+	    <header class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">用户登录</h1>
+            <button type="button" onclick="history.go(-1);" id="confirm" class="mui-btn mui-btn-link">
+                <span class="mui-icon mui-icon-back"></span>返回
+            </button>
+        </header>
+        
+		<div class="mui-content" id="main">
+		    <div id="slider" class="mui-slider">
+                <div class="mui-slider-group mui-slider-loop">
+                    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+                    <div class="mui-slider-item mui-slider-item-duplicate">
+                        <a href="#">
+                            <img src="../images/yuantiao.jpg">
+                            <!-- <p class="mui-slider-title" >统一用户登录</p> -->
+                        </a>
+                    </div>
+                </div>
+            </div>
+			<div class="mui-content-padded" style="margin: 5px;">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>账号</label>
+						<input name="userID" id="userID" type="text" class="mui-input-clear" placeholder="手机号/账号">
+					</div>
+					<div class="mui-input-row">
+                        <label>密码</label>
+                        <input name="userPW" id="userPW" type="password" class="mui-input-clear" placeholder="******">
+                        
+                    </div>
+                    
+                    <!-- <div class="mui-input-row">
+                        <label>验证码</label>
+                        <input name="chkRememberPwd" id="chkRememberPwd" type="checkbox" />
+                    </div> -->
+                    <div class="mui-input-row mui-checkbox ">
+                        <label>记住密码</label>
+                        <input name="chkRememberPwd" id="chkRememberPwd" type="checkbox" checked="checked" />
+                    </div>
+
+					<div class="mui-button-row">
+						<button id='btnUserLogin' type="button" class="mui-btn mui-btn-primary" onclick="userLogin();">登录</button>&nbsp;&nbsp;
+						<button id='btnUserRegister' type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="window.location='user_zc.html'">注册</button>
+					</div>
+				</form>
+				<!-- <div class="mui-input-row" style="margin: 10px 5px;">
+					<textarea id="textarea" rows="5" placeholder="多行文本框"></textarea>
+				</div> -->
+			</div>
+			<!-- <button type="button" onclick="ss();" class="mui-btn mui-btn-primary mui-btn-block">确定</button> -->
+			<!-- <button type="button" onclick="userLogin();" class="btn btn-default" type="button" >确定</button> -->
+			<!-- <button onclick="ser();" class="btn btn-default" type="button" >确定2</button> -->
+			
+		</div>
+	</body>
+	
+    
+    <script>
+        function resultcallback(res, xml, text, proxy) {
+            //$closeToast();
+            var dataObj=eval("("+res+")");
+            for(var i in dataObj.hits.hits){
+                //$("#main").append('
+                // <div class="row"><div class="col-xs-12 uba"><div class="uinn5"><a href="qykjinfo.html?id='+dataObj.hits.hits[i]['_id']+'">'
+                // 
+                // +dataObj.hits.hits[i]['_source']['name']
+                // +'</a></div><div class="ufl">'
+                // +(dataObj.hits.hits[i]['_source']['source']==null?"&nbsp&nbsp&nbsp&nbsp":("&nbsp&nbsp&nbsp&nbsp"
+                // +dataObj.hits.hits[i]['_source']['source']))
+                // +'</div><div class="ufr">'
+                // +(dataObj.hits.hits[i]['_source']['date']==null?"无":dataObj.hits.hits[i]['_source']['date']
+                // +"&nbsp&nbsp&nbsp&nbsp")
+                // +'</div></div></div>');
+                //alert(dataObj.hits.hits);
+            }
+        }
+        
+        function failurecallback(res, xml, text, proxy) {
+            //$closeToast();
+            alert("服务器连接失败，请稍后再试.！");
+        }
+        
+        function gotproxycallback(proxy, wsdl, text) {
+            var uID = $("#userID").val();
+            var uPW = $("#userPW").val();
+            var uSC = $("#sCode").val();
+            
+            var pl = {
+                "loginName":uID,
+                "password":uPW
+            };
+            //$closeToast();
+            if (proxy instanceof SOAPProxy) {
+                //000是否可以直接不写方法名
+               proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            } else {
+                //$closeToast();
+                alert("服务器连接失败，请稍后再试..！");
+            }
+        }
+        
+        
+        
+
+        zy_init();
+        window.uexOnload = function(type){
+            if(!type)
+            {   
+                //检测是否已经登录
+                try {
+                    var uID = localStorage.getItem("userName");
+                    var uPW = localStorage.getItem("userPassword");
+                    var uTM = localStorage.getItem("date");
+                    var expdate2 = new Date();
+                    var cTM = expdate2.getTime(); //current time
+                    if(uID != null && uPW != null && (uTM-cTM)>0 ){
+                        //alert("已经登录");
+                        var htmlPath = "user_dlok.html?username="+uID;
+                        window.location.href = htmlPath;
+                    }
+                } catch (x) {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试...！");
+                }
+            }
+        }
+        
+        ////////////////////////////////////
+        function userLogin(){
+            var uID = $("#userID").val();
+            var uPW = $("#userPW").val();
+            // var uSC = $("#sCode").val();
+            
+            //如果记住密码选项被选中
+            if (document.getElementById('chkRememberPwd').checked == true) {
+                var usr = document.getElementById('userID').value;
+                var pwd = document.getElementById('userPW').value;
+                var expdate = new Date();
+                var time = expdate.getTime() + 14 * (24 * 60 * 60 * 1000);
+                //expdate.setTime(expdate.getTime() + 14 * (24 * 60 * 60 * 1000));
+                //登录服务器
+                $.ajax({
+                    type: "GET",
+                    url: "http://omp.sciinfo.cn/index/third/user/authenticationUser",
+                    data: {'loginName':usr,'password':pwd},
+                    // data: {'loginName':"admin",'password':"123456"},
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function(data) {
+                        if(data.retCode=="SUCESS"){
+                            //alert(data.retCode);
+                            //将用户名和密码写入到Cookie
+                            SetCookie(usr, pwd, time);
+                            //跳转到已经登录页面
+                            var htmlPath = "user_dlok.html?username="+usr;
+                            // var htmlPath = "user_dlok.html?username=admin";
+                            window.location.href = htmlPath;
+                        }
+                        else{
+                            alert("输入账户有误,请重新输入!");
+                            window.location.href = "user_dl.html";
+                        }
+                    }
+                });
+
+            } else {
+                //如果没有选中记住密码,则立即过期
+                ResetCookie();
+            }
+        }
+        
+        window.onload=function onLoginLoaded() {
+            if (isPostBack == "False") {
+                GetLastUser();
+            }
+        }
+        
+        //写入到Cookie
+        function SetCookie(id, pw, dt) {
+            var uname = id;
+            var upass = pw;
+            var udate = dt;
+            localStorage.setItem("userName",uname);
+            localStorage.setItem("userPassword",upass);
+            localStorage.setItem("date",udate);
+            // var b = localStorage.getItem("userName");
+            // alert(udate);
+            // localStorage.removeItem("c");
+        } 
+ 
+        function ResetCookie() {
+            localStorage.removeItem("userName");
+            localStorage.removeItem("userPassword");
+            localStorage.removeItem("date");
+        }
+    </script>      
+	
+</html>

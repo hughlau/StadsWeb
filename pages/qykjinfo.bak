@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="CXZS2015_html2">
+    <head>
+        <title>info</title>
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yse"> 
+        <script src="../js/zy_control.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../css/mui.min.css">
+        
+<link rel="stylesheet" href="../css/New_Main.css">        
+        
+        <script src="../js/jquery1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/soapproxy.js"></script>
+        <script src="../js/main.js"></script>
+        
+        
+    </head>
+    
+    <body>
+        
+        <div class="CXZS2015_header1">
+            <span class="h_title">前沿科技</span>
+            <!--begin --lhc 2015年4月14日11:28:22-->
+            <div class="h_back" onclick="historyBack();" id="confirm">
+                <img src="../images/CXZS_header1_go.gif">
+                <div class="CXZS2015_clear"></div>
+            </div>
+            <!--end --lhc 2015年4月14日11:28:22-->
+            <div class="CXZS2015_Share" style="display:none;">
+                <a herf="javascript:void(0)" class="a_share">
+                    <img alt="" src="../images/CXZS_share_1.png">分享
+                    <span class="CXZS2015_clear"></span>
+                </a>
+                <div class="CXZS2015_Share_box">
+                    <a class="s_one" onclick="shareWeixinText();">微信<img alt="" src="../images/CXZS_Share_ico2.png"></a>
+                    <a class="s_one" onclick="shareSinaText();">微博<img alt="" src="../images/CXZS_Share_ico1.png"></a>
+                    <a class="s_one" onclick="shareTentText();">Q Q<img alt="" src="../images/CXZS_Share_ico3.png"></a>
+                </div>
+            </div>
+        </div>
+ 
+        <div class="CXZS2015_bd3" id="main">
+        </div>        
+        
+    </body>
+    
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script type="text/javascript" charset="utf-8">
+            mui.init();
+            //处理点击事件，需要打开原生浏览器
+            mui('body').on('tap', 'a', function(e) {
+                var href = this.getAttribute('href');
+                if (href) {
+                    if (window.plus) {
+                        plus.runtime.openURL(href);
+                    } else {
+                        location.href = href;
+                    }
+                }
+            });
+            
+            
+        //发送请求按钮的点击事件
+        // document.getElementById("back").addEventListener('tap', function() {
+            // ajax();
+        // });
+    </script>
+    
+    <script>
+        // begin --lhc 2015年4月14日10:09:46
+        var page=0;
+        var q='';
+        var markPoint='';
+        var c='';
+        function historyBack(){
+            window.location.href='qykjlist.html?page='+page+'&q='+q+'&markPoint='+markPoint+'&c='+c;
+        }
+        // end --lhc 2015年4月14日10:09:46
+        function resultcallback(res, xml, text, proxy) {
+            //$closeToast();
+            var dataObj=eval("("+res+")");
+            var name=dataObj.hits.hits[0]['_source']['title']==null?"":dataObj.hits.hits[0]['_source']['title'];
+            var source=dataObj.hits.hits[0]['_source']['source']==null?"":dataObj.hits.hits[0]['_source']['source'];
+            var date=dataObj.hits.hits[0]['_source']['date']==null?"":dataObj.hits.hits[0]['_source']['date'];
+            var info=dataObj.hits.hits[0]['_source']['abstract']==null?"":dataObj.hits.hits[0]['_source']['abstract'];
+            //$("#main").append('<div class="row"align="center">'+name+'</div><div class="row"align="center">'+source+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div><div class="row">&nbsp;&nbsp;&nbsp;&nbsp;'+info+'</div>');
+            $("#main").append('<div class="CXZS2015_Txt"><div class="t_title">'+name+'</div><div class="t_time">'+source+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div><div class="t_txt">'+info+'</div></div>');
+            
+            //$("#main").append('<div align="center" >'+name+'</div><div align="center">'+source+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div><div class="mui-content-padded">&nbsp;&nbsp;&nbsp;&nbsp;'+info+'</div>');
+            //$("#main").append('程服务不可用程服务不可用程服务不可用程服务不可用程服务不可用程服务不可用程服务不可用');
+            //$("#main").append(source);
+            //$("#main").append(info);
+        
+        }
+        
+        function failurecallback(res, xml, text, proxy) {
+            //$closeToast();
+            alert("服务器连接失败，请稍后再试！");
+        }
+        
+        function gotproxycallback(proxy, wsdl, text) {
+            var Request=zy_parse();
+            id=Request["id"];
+                        // begin --lhc 2015年4月14日10:09:46
+            markPoint=id;
+            page=Request["page"];
+            q=Request["q"];
+            c=Request["c"];
+            // end --lhc 2015年4月14日10:09:46
+            var pl = {
+                "userName":"!@#$4321!@#$",
+                "password":"!@#$4321!@#$",
+                "indexName":"wf_mds_chn_keji",
+                "queryString":"_id:"+id,
+                "sortField":"DATE",
+                "fields":"",
+                "pageNumber":"0",
+                "pagePerNo":"5",
+                "facets":"",
+                "fm":"@JSON"
+            };
+            if (proxy instanceof SOAPProxy) {
+               proxy.EsSearch(pl, true, resultcallback, failurecallback);
+            } else {
+                //$closeToast();
+                alert("服务器连接失败，请稍后再试！");
+            }
+        }
+
+        zy_init();
+        window.uexOnload = function(type){
+            if(!type)
+            {      
+                try {
+                    //$toast("正在加载...");
+                    SOAPProxyFabric.fromUrl(website_RequestURL, true, gotproxycallback);
+                } catch (x) {
+                    //$closeToast();
+                    alert("服务器连接失败，请稍后再试！");
+                }
+            }
+        }
+
+
+
+//分享按钮下拉效果---------------------------------------------------------
+        $(function(){
+            $('.a_share').click(function(){
+                $(this).next('.CXZS2015_Share_box').slideToggle('fast');
+            });
+        });        
+//分享---------------------------------------------------------------        
+        function shareWeixinText(){
+            var appKey = "wx072907fe8fe9143d";
+            var appSecret = "66da53db779e22ae3171a95836ea9340";
+            var registerUrl = "http://www.sciinfo.cn/";
+            uexWeiXin.registerApp(appKey);
+            //分享文字
+            //this.registerApp();
+            var txt = "这是来自AppCan中国最大的移动中间键平台对微信支持测试";
+            //分享场景 0：对话 1：朋友圈
+            var sence = 1;
+            uexWeiXin.sendTextContent(sence,txt);
+          }
+          
+        function shareSinaText(){
+            registerSina();
+               // 分享文本，支持分享文本到新浪微博
+                var txt = "这是来自SoTowerMobile平台对新浪微博分享支持测试";
+                uexSina.sendTextContent(txt);
+            }
+        function registerSina(){
+                var appKey = "xiaomi";
+                var appSecret = "3MqAdNoRLHomm4AECoURl7gds1sUIjun";
+                var registerUrl = "https://api.weibo.com/oauth2/authorize?client_id=86357585&redirect_uri=http://omma.com.cn";
+                //注册从新浪开放平台申请的appkey,appsecret,registerUrl。
+                uexSina.registerApp(appKey, appSecret, registerUrl);
+            }
+        function shareTentText(){
+            registerTent();
+                isText=0;
+                //分享文本，支持分享文本到腾讯微博
+                var txt = "这是AppCan平台对腾讯微博分享支持测试";
+                uexTent.sendTextContent(txt);
+            }
+            function registerTent(){
+                var appKey = "801338244";
+                var appSecret = "2428aa8e7478f6ea2c6171b48f5adcf7";
+                var registerUrl = "http://www.3g2win.com/";
+                //注册腾讯微博开放平台申请的appkey,appsecret,registerUrl
+                uexTent.registerApp(appKey, appSecret, registerUrl);
+            }  
+    </script>
+</html>
